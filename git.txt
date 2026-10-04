@@ -1,7 +1,11 @@
 echo "# eShopBD-Modern-Multi-Vendor-eCommerce-Platform" >> README.md
 git init
 git add .
-git commit -m "first commit"
+git commit -m "Install core UI libraries, animations, icons, and state tools"
 git branch -M main
 git remote add origin https://github.com/Asmual/eShopBD-Modern-Multi-Vendor-eCommerce-Platform.git
 git push -u origin main
+
+git add .
+git commit -m "Install core UI libraries, animations, icons, and state tools"
+git push
