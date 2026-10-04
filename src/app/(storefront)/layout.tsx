@@ -1,0 +1,13 @@
+import React from "react";
+
+export default function StorefrontLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="storefront-layout min-h-screen flex flex-col">
+      <main className="flex-1">{children}</main>
+    </div>
+  );
+}
