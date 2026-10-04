@@ -38,16 +38,16 @@ export default function CategorySidebar() {
       aria-label="Product Categories Sidebar"
       className="w-64 shrink-0 bg-white border-x border-b border-border-light rounded-b-xl shadow-xs overflow-hidden"
     >
-      <ul className="divide-y divide-border-light/60">
+      <ul className="divide-y divide-border-light/50">
         {CATEGORIES.map((category) => {
           const Icon = category.icon;
           return (
             <li key={category.id}>
               <Link
                 href={`/products?category=${category.slug}`}
-                className="flex items-center justify-between px-4 py-2.75 text-sm font-medium text-text-main hover:bg-brand-light hover:text-brand transition-colors group"
+                className="flex items-center justify-between px-4 py-2 text-xs sm:text-[13px] font-medium text-text-main hover:bg-brand-light hover:text-brand transition-colors group"
               >
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2.5">
                   <Icon className="w-4 h-4 text-text-muted group-hover:text-brand transition-colors" />
                   <span>{category.name}</span>
                 </div>
