@@ -11,6 +11,7 @@ import {
   Menu,
   X,
 } from "lucide-react";
+import Logo from "./Logo";
 
 interface TopNavbarProps {
   onToggleMobileMenu?: () => void;
@@ -34,39 +35,7 @@ export default function TopNavbar({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20 gap-4 md:gap-8">
           {/* Logo Section */}
-          <Link
-            href="/"
-            className="flex items-center gap-2.5 shrink-0 group focus:outline-hidden"
-            aria-label="eShopBD Home"
-          >
-            {/* Shopping Bag Brand Icon */}
-            <div className="w-11 h-11 rounded-xl bg-brand flex items-center justify-center text-white shadow-xs group-hover:bg-brand-hover transition-colors">
-              <svg
-                className="w-6 h-6 transform transition-transform group-hover:scale-110"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
-                <path d="M3 6h18" />
-                <path d="M16 10a4 4 0 0 1-8 0" />
-              </svg>
-            </div>
-
-            {/* Brand Name */}
-            <div className="flex flex-col">
-              <span className="text-2xl font-extrabold tracking-tight text-text-main flex items-center leading-none">
-                eShop<span className="text-brand">BD</span>
-              </span>
-              <span className="text-[10px] uppercase tracking-wider font-semibold text-text-muted mt-0.5">
-                Multi-Vendor Store
-              </span>
-            </div>
-          </Link>
+          <Logo size="md" />
 
           {/* Search Bar (Centered) */}
           <div className="flex-1 max-w-2xl hidden md:block">
@@ -127,7 +96,7 @@ export default function TopNavbar({
               </span>
             </Link>
 
-            {/* Single Login / Sign Up Button (Top bar only as specified) */}
+            {/* Single Login / Sign Up Button */}
             <Link
               href="/login"
               className="flex items-center gap-2 text-sm font-medium text-text-main hover:text-brand transition-colors pl-2 border-l border-border-light"

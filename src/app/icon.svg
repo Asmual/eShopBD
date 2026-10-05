@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <!-- Gradient Definition -->
+  <defs>
+    <linearGradient id="emeraldGrad" x1="4" y1="4" x2="44" y2="44" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#156B48" />
+      <stop offset="100%" stop-color="#0E4B32" />
+    </linearGradient>
+    <linearGradient id="warmGoldGrad" x1="20" y1="20" x2="44" y2="44" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#E5A638" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+  </defs>
+
+  <!-- Rounded App Tile Container -->
+  <rect width="48" height="48" rx="12" fill="url(#emeraldGrad)" />
+
+  <!-- Shopping Bag Geometry -->
+  <path
+    d="M16 16.5C16 12.3579 19.3579 9 23.5 9h1C28.6421 9 32 12.3579 32 16.5V18H16v-1.5z"
+    stroke="#F3ECE1"
+    stroke-width="2.7"
+    stroke-linecap="round"
+  />
+  <path
+    d="M12 18h24l-2.2 18.2c-.2 1.6-1.6 2.8-3.2 2.8H17.4c-1.6 0-3-1.2-3.2-2.8L12 18z"
+    fill="#FFFFFF"
+  />
+
+  <!-- Dynamic Cart Wheel / Speed Swoop -->
+  <circle cx="28.5" cy="31.5" r="5" fill="#156B48" />
+  <circle cx="28.5" cy="31.5" r="2.2" fill="#FFFFFF" />
+  <path
+    d="M21 27c2-3 7-3.5 11-1.5"
+    stroke="url(#warmGoldGrad)"
+    stroke-width="2.4"
+    stroke-linecap="round"
+  />
+
+  <!-- Small Sparkle / Checkmark -->
+  <circle cx="20" cy="23" r="1.5" fill="#156B48" />
+</svg>

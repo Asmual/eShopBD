@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import Logo from "@/components/common/Logo";
 
 export default function AuthLayout({
   children,
@@ -21,36 +22,7 @@ export default function AuthLayout({
 
       {/* Top Header */}
       <header className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex items-center justify-between">
-        <Link
-          href="/"
-          className="flex items-center gap-2.5 group focus:outline-hidden"
-          aria-label="Back to eShopBD Home"
-        >
-          <div className="w-10 h-10 rounded-xl bg-brand flex items-center justify-center text-white shadow-xs group-hover:bg-brand-hover transition-colors">
-            <svg
-              className="w-5 h-5 transform transition-transform group-hover:scale-110"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
-              <path d="M3 6h18" />
-              <path d="M16 10a4 4 0 0 1-8 0" />
-            </svg>
-          </div>
-          <div className="flex flex-col">
-            <span className="text-xl font-extrabold tracking-tight text-text-main flex items-center leading-none">
-              eShop<span className="text-brand">BD</span>
-            </span>
-            <span className="text-[10px] uppercase tracking-wider font-semibold text-text-muted mt-0.5">
-              Secure Auth
-            </span>
-          </div>
-        </Link>
+        <Logo size="md" />
 
         <Link
           href="/"
