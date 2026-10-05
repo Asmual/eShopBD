@@ -17,21 +17,21 @@ export default function Logo({
 }: LogoProps) {
   const sizeConfig = {
     sm: {
+      container: "w-7 h-7 sm:w-8 sm:h-8",
+      imgPx: 32,
+      textClass: "text-base sm:text-lg",
+      subClass: "text-[8px] tracking-wider",
+    },
+    md: {
       container: "w-9 h-9 sm:w-10 sm:h-10",
       imgPx: 40,
       textClass: "text-lg sm:text-xl",
-      subClass: "text-[9px]",
-    },
-    md: {
-      container: "w-12 h-12 sm:w-13 sm:h-13",
-      imgPx: 52,
-      textClass: "text-2xl sm:text-[26px]",
-      subClass: "text-[10px] tracking-wider",
+      subClass: "text-[9px] tracking-wider",
     },
     lg: {
-      container: "w-16 h-16 sm:w-18 sm:h-18",
-      imgPx: 72,
-      textClass: "text-3xl sm:text-4xl",
+      container: "w-14 h-14 sm:w-16 sm:h-16",
+      imgPx: 64,
+      textClass: "text-2xl sm:text-3xl",
       subClass: "text-xs tracking-widest",
     },
   }[size];
