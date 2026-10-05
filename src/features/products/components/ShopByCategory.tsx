@@ -18,28 +18,35 @@ const CATEGORIES_SHOWCASE: CategoryShowcaseItem[] = [
     id: "cat-women",
     name: "Women",
     slug: "women",
-    image: "/images/categories/women.jpg",
+    image: "/images/categories/category-women-v2.jpg",
     href: "/products?category=women",
   },
   {
     id: "cat-men",
     name: "Men",
     slug: "men",
-    image: "/images/categories/men.jpg",
+    image: "/images/categories/category-men-v2.jpg",
     href: "/products?category=men",
   },
   {
     id: "cat-kids",
     name: "Kids",
     slug: "kids",
-    image: "/images/categories/kids.jpg",
+    image: "/images/categories/category-kids-v2.jpg",
     href: "/products?category=kids",
+  },
+  {
+    id: "cat-toys",
+    name: "Toys & Games",
+    slug: "toys-games",
+    image: "/images/categories/category-toys-v2.jpg",
+    href: "/products?category=toys-games",
   },
   {
     id: "cat-electronics",
     name: "Electronics",
     slug: "electronics",
-    image: "/images/categories/electronics.jpg",
+    image: "/images/categories/category-electronics-v2.jpg",
     href: "/products?category=electronics",
   },
 ];
@@ -63,8 +70,8 @@ export default function ShopByCategory() {
           />
         </div>
 
-        {/* 4 Circular Categories Responsive Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 lg:gap-10 justify-items-center max-w-5xl mx-auto">
+        {/* 5 Circular Categories Responsive Grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 sm:gap-6 lg:gap-8 justify-items-center max-w-6xl mx-auto">
           {CATEGORIES_SHOWCASE.map((item) => (
             <Link
               key={item.id}

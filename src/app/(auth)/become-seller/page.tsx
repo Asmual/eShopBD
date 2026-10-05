@@ -1,4 +1,4 @@
-import React from "react";
+
 import SellerOnboardingForm from "@/features/seller/components/SellerOnboardingForm";
 
 export default function BecomeSellerPage() {

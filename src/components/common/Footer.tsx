@@ -319,11 +319,11 @@ export default function Footer() {
               &copy; {currentYear} <span className="font-semibold text-text-main">eShopBD</span>. All Rights Reserved.
             </p>
 
-            {/* Center: Design Credit (Preserved from user design mock) */}
+            {/* Center: Design Credit */}
             <p className="text-center">
               Design by{" "}
               <span className="font-bold text-brand hover:underline cursor-pointer">
-                Russell Web Craft
+                Asmual Obaidul Hoque
               </span>
             </p>
 

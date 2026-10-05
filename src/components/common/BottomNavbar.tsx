@@ -4,38 +4,23 @@ import React from "react";
 import Link from "next/link";
 import {
   Menu,
-  ChevronDown,
   Store,
   Flame,
 } from "lucide-react";
-import { useUIStore } from "@/store/uiStore";
 
 export default function BottomNavbar() {
-  const { isCategorySidebarOpen, toggleCategorySidebar } = useUIStore();
-
   return (
     <div className="w-full bg-brand text-white relative z-30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-12">
-          {/* Left: All Categories Sidebar Trigger */}
+          {/* Left: All Categories Permanent Header (Fixed on Desktop) */}
           <div className="relative shrink-0">
-            <button
-              type="button"
-              onClick={toggleCategorySidebar}
-              aria-expanded={isCategorySidebarOpen}
-              aria-label="Toggle Category Sidebar"
-              className="h-12 w-64 px-5 bg-brand-hover hover:brightness-110 flex items-center justify-between text-sm font-bold tracking-wide uppercase transition-colors cursor-pointer select-none"
+            <div
+              className="h-12 w-64 px-5 bg-brand-hover flex items-center gap-3 text-sm font-bold tracking-wide uppercase select-none"
             >
-              <div className="flex items-center gap-3">
-                <Menu className="w-5 h-5 shrink-0" />
-                <span>All Categories</span>
-              </div>
-              <ChevronDown
-                className={`w-4 h-4 transition-transform duration-200 ${
-                  isCategorySidebarOpen ? "rotate-180" : ""
-                }`}
-              />
-            </button>
+              <Menu className="w-5 h-5 shrink-0" />
+              <span>All Categories</span>
+            </div>
           </div>
 
           {/* Center: Main Navigation Links */}
