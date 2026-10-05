@@ -29,18 +29,11 @@ const CATEGORIES_SHOWCASE: CategoryShowcaseItem[] = [
     href: "/products?category=men",
   },
   {
-    id: "cat-home-living",
-    name: "Home & Living",
-    slug: "home-living",
-    image: "/images/categories/home-living.jpg",
-    href: "/products?category=home-living",
-  },
-  {
-    id: "cat-beauty",
-    name: "Beauty",
-    slug: "beauty",
-    image: "/images/categories/beauty.jpg",
-    href: "/products?category=beauty",
+    id: "cat-kids",
+    name: "Kids",
+    slug: "kids",
+    image: "/images/categories/kids.jpg",
+    href: "/products?category=kids",
   },
   {
     id: "cat-electronics",
@@ -49,18 +42,11 @@ const CATEGORIES_SHOWCASE: CategoryShowcaseItem[] = [
     image: "/images/categories/electronics.jpg",
     href: "/products?category=electronics",
   },
-  {
-    id: "cat-deals",
-    name: "Deals",
-    slug: "deals",
-    image: "/images/categories/deals.jpg",
-    href: "/products?filter=deals",
-  },
 ];
 
 export default function ShopByCategory() {
   return (
-    <section aria-label="Shop By Category Showcase" className="w-full bg-white py-8 sm:py-10">
+    <section aria-label="Shop By Category Showcase" className="w-full bg-white py-8 sm:py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header with Decorative Dashed Lines */}
         <div className="flex items-center justify-center gap-3 sm:gap-4 mb-8 sm:mb-10">
@@ -77,8 +63,8 @@ export default function ShopByCategory() {
           />
         </div>
 
-        {/* 6 Circular Categories Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 sm:gap-6 lg:gap-5 justify-items-center">
+        {/* 4 Circular Categories Responsive Grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 lg:gap-10 justify-items-center max-w-5xl mx-auto">
           {CATEGORIES_SHOWCASE.map((item) => (
             <Link
               key={item.id}
@@ -87,12 +73,12 @@ export default function ShopByCategory() {
               aria-label={`Shop ${item.name} category`}
             >
               {/* Circular Image Container */}
-              <div className="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 rounded-full overflow-hidden bg-brand-banner shadow-2xs group-hover:shadow-md border-2 border-transparent group-hover:border-brand/20 transition-all duration-300">
+              <div className="relative w-36 h-36 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-full overflow-hidden bg-brand-surface shadow-2xs group-hover:shadow-md border-2 border-transparent group-hover:border-brand/30 transition-all duration-300">
                 <Image
                   src={item.image}
                   alt={`${item.name} collection`}
                   fill
-                  sizes="(max-width: 640px) 140px, (max-width: 1024px) 160px, 180px"
+                  sizes="(max-width: 640px) 150px, (max-width: 1024px) 180px, 200px"
                   className="object-cover object-center group-hover:scale-108 transition-transform duration-300"
                 />
 
@@ -101,7 +87,7 @@ export default function ShopByCategory() {
               </div>
 
               {/* Category Name */}
-              <h3 className="mt-3.5 text-sm sm:text-base font-bold text-text-main group-hover:text-brand transition-colors">
+              <h3 className="mt-3.5 text-base sm:text-lg font-bold text-text-main group-hover:text-brand transition-colors">
                 {item.name}
               </h3>
 

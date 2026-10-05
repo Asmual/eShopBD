@@ -15,10 +15,25 @@ export default function Logo({
   variant = "dark",
   showSubtitle = true,
 }: LogoProps) {
-  const iconDimensions = {
-    sm: { width: 32, height: 32, textClass: "text-lg", subClass: "text-[9px]" },
-    md: { width: 42, height: 42, textClass: "text-2xl", subClass: "text-[10px]" },
-    lg: { width: 52, height: 52, textClass: "text-3xl", subClass: "text-xs" },
+  const sizeConfig = {
+    sm: {
+      container: "w-9 h-9 sm:w-10 sm:h-10",
+      imgPx: 40,
+      textClass: "text-lg sm:text-xl",
+      subClass: "text-[9px]",
+    },
+    md: {
+      container: "w-12 h-12 sm:w-13 sm:h-13",
+      imgPx: 52,
+      textClass: "text-2xl sm:text-[26px]",
+      subClass: "text-[10px] tracking-wider",
+    },
+    lg: {
+      container: "w-16 h-16 sm:w-18 sm:h-18",
+      imgPx: 72,
+      textClass: "text-3xl sm:text-4xl",
+      subClass: "text-xs tracking-widest",
+    },
   }[size];
 
   const textColor = variant === "light" ? "text-white" : "text-text-main";
@@ -27,34 +42,33 @@ export default function Logo({
   return (
     <Link
       href="/"
-      className={`inline-flex items-center gap-2.5 group focus:outline-hidden select-none ${className}`}
+      className={`inline-flex items-center gap-2.5 sm:gap-3 group focus:outline-hidden select-none ${className}`}
       aria-label="eShopBD Homepage"
     >
-      {/* Brand Icon Image */}
+      {/* Brand Icon Image (Optimized & Balanced) */}
       <div
-        className="relative shrink-0 rounded-xl overflow-hidden shadow-2xs group-hover:shadow-xs transition-transform group-hover:scale-105 duration-200"
-        style={{ width: iconDimensions.width, height: iconDimensions.height }}
+        className={`relative shrink-0 ${sizeConfig.container} flex items-center justify-center transition-transform group-hover:scale-105 duration-200`}
       >
         <Image
           src="/images/logo/logo-icon.png"
           alt="eShopBD Brand Logo"
-          width={iconDimensions.width}
-          height={iconDimensions.height}
-          className="object-contain w-full h-full"
+          width={sizeConfig.imgPx}
+          height={sizeConfig.imgPx}
+          className="object-contain w-full h-full drop-shadow-2xs"
           priority
         />
       </div>
 
       {/* Brand Name & Tagline */}
-      <div className="flex flex-col leading-none">
+      <div className="flex flex-col leading-none justify-center">
         <span
-          className={`font-black tracking-tight ${iconDimensions.textClass} ${textColor} flex items-center`}
+          className={`font-black tracking-tight ${sizeConfig.textClass} ${textColor} flex items-center leading-tight`}
         >
           eShop<span className="text-brand">BD</span>
         </span>
         {showSubtitle && (
           <span
-            className={`font-bold uppercase tracking-widest ${iconDimensions.subClass} ${subColor} mt-0.5`}
+            className={`font-bold uppercase ${sizeConfig.subClass} ${subColor} mt-0.5 leading-tight`}
           >
             Multi-Vendor Store
           </span>
