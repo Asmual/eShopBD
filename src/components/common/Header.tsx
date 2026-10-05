@@ -10,6 +10,7 @@ import {
   Home,
   Layers,
   Award,
+  Sparkles,
   Flame,
   Tag,
   Store,
@@ -87,6 +88,15 @@ export default function Header() {
               >
                 <Layers className="w-4 h-4 text-brand" />
                 <span>Categories</span>
+              </Link>
+
+              <Link
+                href="/products?filter=new-arrival"
+                onClick={closeMobileMenu}
+                className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-text-main hover:bg-brand-light hover:text-brand transition-colors"
+              >
+                <Sparkles className="w-4 h-4 text-brand" />
+                <span>New Arrival</span>
               </Link>
 
               <Link

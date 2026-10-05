@@ -58,6 +58,13 @@ export default function BottomNavbar() {
             </Link>
 
             <Link
+              href="/products?filter=new-arrival"
+              className="px-3 py-1.5 rounded-md text-sm font-medium text-white/90 hover:text-white hover:bg-brand-hover transition-colors"
+            >
+              New Arrival
+            </Link>
+
+            <Link
               href="/products?filter=best-sellers"
               className="px-3 py-1.5 rounded-md text-sm font-medium text-white/90 hover:text-white hover:bg-brand-hover transition-colors"
             >

@@ -60,26 +60,26 @@ export default function LoginForm({ onSwitchToRegister }: LoginFormProps) {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto p-6 sm:p-8 flex flex-col justify-center">
+    <div className="w-full max-w-md mx-auto p-4 sm:p-6 flex flex-col justify-center">
       {/* Header */}
-      <div className="mb-6 text-left">
+      <div className="mb-3.5 text-left">
         <span className="text-xs font-bold uppercase tracking-wider text-brand">
           Welcome Back
         </span>
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-text-main mt-1 tracking-tight">
+        <h2 className="text-xl sm:text-2xl font-bold text-text-main mt-0.5 tracking-tight">
           Sign In to eShopBD
         </h2>
-        <p className="text-xs sm:text-sm text-text-muted mt-1">
+        <p className="text-xs text-text-muted mt-0.5">
           Access your personalized dashboard, orders, and wishlist.
         </p>
       </div>
 
       {/* Social Login Options */}
-      <div className="grid grid-cols-2 gap-3 mb-5">
+      <div className="grid grid-cols-2 gap-2.5 mb-3.5">
         <button
           type="button"
           onClick={() => handleSocialLogin("Google")}
-          className="flex items-center justify-center gap-2 px-3 py-2.5 bg-white border border-border-light hover:border-brand/40 hover:bg-brand-light/30 rounded-xl text-xs sm:text-sm font-semibold text-text-main transition-all cursor-pointer shadow-2xs"
+          className="flex items-center justify-center gap-2 px-3 py-2 bg-white border border-border-light hover:border-brand/40 hover:bg-brand-light/30 rounded-xl text-xs sm:text-sm font-semibold text-text-main transition-all cursor-pointer shadow-2xs"
         >
           <svg className="w-4 h-4" viewBox="0 0 24 24">
             <path
@@ -105,7 +105,7 @@ export default function LoginForm({ onSwitchToRegister }: LoginFormProps) {
         <button
           type="button"
           onClick={() => handleSocialLogin("Facebook")}
-          className="flex items-center justify-center gap-2 px-3 py-2.5 bg-white border border-border-light hover:border-brand/40 hover:bg-brand-light/30 rounded-xl text-xs sm:text-sm font-semibold text-text-main transition-all cursor-pointer shadow-2xs"
+          className="flex items-center justify-center gap-2 px-3 py-2 bg-white border border-border-light hover:border-brand/40 hover:bg-brand-light/30 rounded-xl text-xs sm:text-sm font-semibold text-text-main transition-all cursor-pointer shadow-2xs"
         >
           <svg className="w-4 h-4 fill-[#1877F2]" viewBox="0 0 24 24">
             <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
@@ -114,25 +114,25 @@ export default function LoginForm({ onSwitchToRegister }: LoginFormProps) {
         </button>
       </div>
 
-      <div className="relative flex items-center justify-center mb-5">
+      <div className="relative flex items-center justify-center mb-3.5">
         <div className="w-full border-t border-border-light" />
-        <span className="bg-white px-3 text-[11px] font-bold uppercase tracking-wider text-text-muted absolute">
+        <span className="bg-white px-2.5 text-[10px] font-bold uppercase tracking-wider text-text-muted absolute">
           Or with email
         </span>
       </div>
 
       {/* Login Form */}
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
         {/* Email Field */}
         <div>
           <label
             htmlFor="login-email"
-            className="block text-xs font-semibold text-text-main mb-1.5"
+            className="block text-xs font-semibold text-text-main mb-1"
           >
             Email Address
           </label>
           <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-text-muted">
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-text-muted">
               <Mail className="w-4 h-4" />
             </div>
             <input
@@ -141,7 +141,7 @@ export default function LoginForm({ onSwitchToRegister }: LoginFormProps) {
               autoComplete="email"
               placeholder="name@example.com"
               {...register("email")}
-              className={`w-full pl-10 pr-3.5 py-2.5 text-xs sm:text-sm text-text-main bg-white border rounded-xl focus:outline-hidden transition-all placeholder:text-text-muted/60 ${
+              className={`w-full pl-9 pr-3 py-2 text-xs sm:text-sm text-text-main bg-white border rounded-xl focus:outline-hidden transition-all placeholder:text-text-muted/60 ${
                 errors.email
                   ? "border-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500"
                   : "border-border-light focus:border-brand focus:ring-1 focus:ring-brand"
@@ -149,13 +149,13 @@ export default function LoginForm({ onSwitchToRegister }: LoginFormProps) {
             />
           </div>
           {errors.email && (
-            <p className="mt-1 text-xs text-red-500">{errors.email.message}</p>
+            <p className="mt-0.5 text-[11px] text-red-500">{errors.email.message}</p>
           )}
         </div>
 
         {/* Password Field */}
         <div>
-          <div className="flex items-center justify-between mb-1.5">
+          <div className="flex items-center justify-between mb-1">
             <label
               htmlFor="login-password"
               className="block text-xs font-semibold text-text-main"
@@ -171,7 +171,7 @@ export default function LoginForm({ onSwitchToRegister }: LoginFormProps) {
             </button>
           </div>
           <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-text-muted">
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-text-muted">
               <Lock className="w-4 h-4" />
             </div>
             <input
@@ -180,7 +180,7 @@ export default function LoginForm({ onSwitchToRegister }: LoginFormProps) {
               autoComplete="current-password"
               placeholder="••••••••"
               {...register("password")}
-              className={`w-full pl-10 pr-10 py-2.5 text-xs sm:text-sm text-text-main bg-white border rounded-xl focus:outline-hidden transition-all placeholder:text-text-muted/60 ${
+              className={`w-full pl-9 pr-9 py-2 text-xs sm:text-sm text-text-main bg-white border rounded-xl focus:outline-hidden transition-all placeholder:text-text-muted/60 ${
                 errors.password
                   ? "border-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500"
                   : "border-border-light focus:border-brand focus:ring-1 focus:ring-brand"
@@ -190,7 +190,7 @@ export default function LoginForm({ onSwitchToRegister }: LoginFormProps) {
               type="button"
               onClick={() => setShowPassword((prev) => !prev)}
               aria-label={showPassword ? "Hide password" : "Show password"}
-              className="absolute inset-y-0 right-0 pr-3 flex items-center text-text-muted hover:text-text-main cursor-pointer"
+              className="absolute inset-y-0 right-0 pr-2.5 flex items-center text-text-muted hover:text-text-main cursor-pointer"
             >
               {showPassword ? (
                 <EyeOff className="w-4 h-4" />
@@ -200,7 +200,7 @@ export default function LoginForm({ onSwitchToRegister }: LoginFormProps) {
             </button>
           </div>
           {errors.password && (
-            <p className="mt-1 text-xs text-red-500">{errors.password.message}</p>
+            <p className="mt-0.5 text-[11px] text-red-500">{errors.password.message}</p>
           )}
         </div>
 
@@ -224,7 +224,7 @@ export default function LoginForm({ onSwitchToRegister }: LoginFormProps) {
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full mt-2 py-3 px-4 bg-brand hover:bg-brand-hover text-white rounded-xl text-sm font-semibold shadow-xs hover:shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
+          className="w-full mt-1.5 py-2.5 px-4 bg-brand hover:bg-brand-hover text-white rounded-xl text-xs sm:text-sm font-semibold shadow-xs hover:shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
         >
           {isLoading ? (
             <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -238,7 +238,7 @@ export default function LoginForm({ onSwitchToRegister }: LoginFormProps) {
       </form>
 
       {/* Mobile / Fallback switch link */}
-      <div className="mt-6 text-center lg:hidden">
+      <div className="mt-4 text-center lg:hidden">
         <p className="text-xs text-text-muted">
           Don&apos;t have an account?{" "}
           <button

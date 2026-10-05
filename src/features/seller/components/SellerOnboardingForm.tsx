@@ -180,16 +180,16 @@ export default function SellerOnboardingForm() {
   }
 
   return (
-    <div className="w-full max-w-2xl mx-auto bg-white rounded-3xl border border-border-light shadow-xl p-6 sm:p-10">
+    <div className="w-full max-w-2xl mx-auto bg-white rounded-2xl sm:rounded-3xl border border-border-light shadow-lg p-4 sm:p-6">
       {/* Top Stepper Indicator */}
-      <div className="mb-8">
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-brand text-white flex items-center justify-center font-bold">
-              <Store className="w-5 h-5" />
+      <div className="mb-4">
+        <div className="flex items-center justify-between mb-2.5">
+          <div className="flex items-center gap-2.5">
+            <div className="w-9 h-9 rounded-lg bg-brand text-white flex items-center justify-center font-bold shrink-0">
+              <Store className="w-4 h-4" />
             </div>
             <div>
-              <h2 className="text-xl sm:text-2xl font-black text-text-main tracking-tight">
+              <h2 className="text-lg sm:text-xl font-bold text-text-main tracking-tight leading-tight">
                 Vendor Onboarding
               </h2>
               <p className="text-xs text-text-muted">
@@ -202,13 +202,13 @@ export default function SellerOnboardingForm() {
               </p>
             </div>
           </div>
-          <span className="text-xs font-bold text-brand bg-brand-light px-3 py-1 rounded-full">
-            {Math.round((currentStep / 3) * 100)}% Completed
+          <span className="text-xs font-semibold text-brand bg-brand-light px-2.5 py-0.5 rounded-full">
+            {Math.round((currentStep / 3) * 100)}% Done
           </span>
         </div>
 
         {/* Progress bar */}
-        <div className="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
+        <div className="w-full h-1.5 bg-gray-100 rounded-full overflow-hidden">
           <div
             className="h-full bg-brand transition-all duration-300"
             style={{ width: `${(currentStep / 3) * 100}%` }}
@@ -216,19 +216,19 @@ export default function SellerOnboardingForm() {
         </div>
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         {/* STEP 1: Account Credentials */}
         {currentStep === 1 && (
-          <div className="space-y-4 animate-in fade-in duration-300">
+          <div className="space-y-3 animate-in fade-in duration-300">
             <div>
               <label
                 htmlFor="seller-fullname"
-                className="block text-xs font-semibold text-text-main mb-1.5"
+                className="block text-xs font-semibold text-text-main mb-1"
               >
                 Owner Full Name *
               </label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-text-muted">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-text-muted">
                   <User className="w-4 h-4" />
                 </div>
                 <input
@@ -236,7 +236,7 @@ export default function SellerOnboardingForm() {
                   type="text"
                   placeholder="e.g. Asmual Hossain"
                   {...register("fullName")}
-                  className={`w-full pl-10 pr-3.5 py-2.5 text-xs sm:text-sm text-text-main bg-white border rounded-xl focus:outline-hidden transition-all ${
+                  className={`w-full pl-9 pr-3 py-2 text-xs sm:text-sm text-text-main bg-white border rounded-xl focus:outline-hidden transition-all ${
                     errors.fullName
                       ? "border-red-500 focus:ring-1 focus:ring-red-500"
                       : "border-border-light focus:border-brand focus:ring-1 focus:ring-brand"
@@ -244,20 +244,20 @@ export default function SellerOnboardingForm() {
                 />
               </div>
               {errors.fullName && (
-                <p className="mt-1 text-xs text-red-500">{errors.fullName.message}</p>
+                <p className="mt-0.5 text-[11px] text-red-500">{errors.fullName.message}</p>
               )}
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <label
                   htmlFor="seller-email"
-                  className="block text-xs font-semibold text-text-main mb-1.5"
+                  className="block text-xs font-semibold text-text-main mb-1"
                 >
                   Business Email *
                 </label>
                 <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-text-muted">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-text-muted">
                     <Mail className="w-4 h-4" />
                   </div>
                   <input
@@ -265,7 +265,7 @@ export default function SellerOnboardingForm() {
                     type="email"
                     placeholder="seller@domain.com"
                     {...register("email")}
-                    className={`w-full pl-10 pr-3.5 py-2.5 text-xs sm:text-sm text-text-main bg-white border rounded-xl focus:outline-hidden transition-all ${
+                    className={`w-full pl-9 pr-3 py-2 text-xs sm:text-sm text-text-main bg-white border rounded-xl focus:outline-hidden transition-all ${
                       errors.email
                         ? "border-red-500 focus:ring-1 focus:ring-red-500"
                         : "border-border-light focus:border-brand focus:ring-1 focus:ring-brand"
@@ -273,19 +273,19 @@ export default function SellerOnboardingForm() {
                   />
                 </div>
                 {errors.email && (
-                  <p className="mt-1 text-xs text-red-500">{errors.email.message}</p>
+                  <p className="mt-0.5 text-[11px] text-red-500">{errors.email.message}</p>
                 )}
               </div>
 
               <div>
                 <label
                   htmlFor="seller-phone"
-                  className="block text-xs font-semibold text-text-main mb-1.5"
+                  className="block text-xs font-semibold text-text-main mb-1"
                 >
                   Contact Number *
                 </label>
                 <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-text-muted">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-text-muted">
                     <Phone className="w-4 h-4" />
                   </div>
                   <input
@@ -293,7 +293,7 @@ export default function SellerOnboardingForm() {
                     type="tel"
                     placeholder="+880 1XXXXXXXXX"
                     {...register("phone")}
-                    className={`w-full pl-10 pr-3.5 py-2.5 text-xs sm:text-sm text-text-main bg-white border rounded-xl focus:outline-hidden transition-all ${
+                    className={`w-full pl-9 pr-3 py-2 text-xs sm:text-sm text-text-main bg-white border rounded-xl focus:outline-hidden transition-all ${
                       errors.phone
                         ? "border-red-500 focus:ring-1 focus:ring-red-500"
                         : "border-border-light focus:border-brand focus:ring-1 focus:ring-brand"
@@ -301,21 +301,21 @@ export default function SellerOnboardingForm() {
                   />
                 </div>
                 {errors.phone && (
-                  <p className="mt-1 text-xs text-red-500">{errors.phone.message}</p>
+                  <p className="mt-0.5 text-[11px] text-red-500">{errors.phone.message}</p>
                 )}
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <label
                   htmlFor="seller-password"
-                  className="block text-xs font-semibold text-text-main mb-1.5"
+                  className="block text-xs font-semibold text-text-main mb-1"
                 >
                   Password *
                 </label>
                 <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-text-muted">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-text-muted">
                     <Lock className="w-4 h-4" />
                   </div>
                   <input
@@ -323,7 +323,7 @@ export default function SellerOnboardingForm() {
                     type={showPassword ? "text" : "password"}
                     placeholder="••••••••"
                     {...register("password")}
-                    className={`w-full pl-10 pr-10 py-2.5 text-xs sm:text-sm text-text-main bg-white border rounded-xl focus:outline-hidden transition-all ${
+                    className={`w-full pl-9 pr-9 py-2 text-xs sm:text-sm text-text-main bg-white border rounded-xl focus:outline-hidden transition-all ${
                       errors.password
                         ? "border-red-500 focus:ring-1 focus:ring-red-500"
                         : "border-border-light focus:border-brand focus:ring-1 focus:ring-brand"
@@ -333,25 +333,25 @@ export default function SellerOnboardingForm() {
                     type="button"
                     onClick={() => setShowPassword((p) => !p)}
                     aria-label={showPassword ? "Hide password" : "Show password"}
-                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-text-muted hover:text-text-main cursor-pointer"
+                    className="absolute inset-y-0 right-0 pr-2.5 flex items-center text-text-muted hover:text-text-main cursor-pointer"
                   >
                     {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                   </button>
                 </div>
                 {errors.password && (
-                  <p className="mt-1 text-xs text-red-500">{errors.password.message}</p>
+                  <p className="mt-0.5 text-[11px] text-red-500">{errors.password.message}</p>
                 )}
               </div>
 
               <div>
                 <label
                   htmlFor="seller-confirm-password"
-                  className="block text-xs font-semibold text-text-main mb-1.5"
+                  className="block text-xs font-semibold text-text-main mb-1"
                 >
                   Confirm Password *
                 </label>
                 <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-text-muted">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-text-muted">
                     <Lock className="w-4 h-4" />
                   </div>
                   <input
@@ -359,7 +359,7 @@ export default function SellerOnboardingForm() {
                     type={showConfirmPassword ? "text" : "password"}
                     placeholder="••••••••"
                     {...register("confirmPassword")}
-                    className={`w-full pl-10 pr-10 py-2.5 text-xs sm:text-sm text-text-main bg-white border rounded-xl focus:outline-hidden transition-all ${
+                    className={`w-full pl-9 pr-9 py-2 text-xs sm:text-sm text-text-main bg-white border rounded-xl focus:outline-hidden transition-all ${
                       errors.confirmPassword
                         ? "border-red-500 focus:ring-1 focus:ring-red-500"
                         : "border-border-light focus:border-brand focus:ring-1 focus:ring-brand"
@@ -369,24 +369,24 @@ export default function SellerOnboardingForm() {
                     type="button"
                     onClick={() => setShowConfirmPassword((p) => !p)}
                     aria-label={showConfirmPassword ? "Hide password" : "Show password"}
-                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-text-muted hover:text-text-main cursor-pointer"
+                    className="absolute inset-y-0 right-0 pr-2.5 flex items-center text-text-muted hover:text-text-main cursor-pointer"
                   >
                     {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                   </button>
                 </div>
                 {errors.confirmPassword && (
-                  <p className="mt-1 text-xs text-red-500">
+                  <p className="mt-0.5 text-[11px] text-red-500">
                     {errors.confirmPassword.message}
                   </p>
                 )}
               </div>
             </div>
 
-            <div className="pt-4 flex justify-end">
+            <div className="pt-2 flex justify-end">
               <button
                 type="button"
                 onClick={nextStep}
-                className="px-6 py-2.5 bg-brand hover:bg-brand-hover text-white text-xs sm:text-sm font-semibold rounded-xl flex items-center gap-2 transition-all cursor-pointer shadow-xs"
+                className="px-5 py-2 bg-brand hover:bg-brand-hover text-white text-xs sm:text-sm font-semibold rounded-xl flex items-center gap-2 transition-all cursor-pointer shadow-xs"
               >
                 <span>Continue to Store Details</span>
                 <ArrowRight className="w-4 h-4" />
@@ -397,16 +397,16 @@ export default function SellerOnboardingForm() {
 
         {/* STEP 2: Store Information */}
         {currentStep === 2 && (
-          <div className="space-y-4 animate-in fade-in duration-300">
+          <div className="space-y-3 animate-in fade-in duration-300">
             <div>
               <label
                 htmlFor="store-name"
-                className="block text-xs font-semibold text-text-main mb-1.5"
+                className="block text-xs font-semibold text-text-main mb-1"
               >
                 Store / Brand Name *
               </label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-text-muted">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-text-muted">
                   <Building2 className="w-4 h-4" />
                 </div>
                 <input
@@ -414,7 +414,7 @@ export default function SellerOnboardingForm() {
                   type="text"
                   placeholder="e.g. Apex Electronics Ltd."
                   {...register("storeName")}
-                  className={`w-full pl-10 pr-3.5 py-2.5 text-xs sm:text-sm text-text-main bg-white border rounded-xl focus:outline-hidden transition-all ${
+                  className={`w-full pl-9 pr-3 py-2 text-xs sm:text-sm text-text-main bg-white border rounded-xl focus:outline-hidden transition-all ${
                     errors.storeName
                       ? "border-red-500 focus:ring-1 focus:ring-red-500"
                       : "border-border-light focus:border-brand focus:ring-1 focus:ring-brand"
@@ -422,21 +422,21 @@ export default function SellerOnboardingForm() {
                 />
               </div>
               {errors.storeName && (
-                <p className="mt-1 text-xs text-red-500">{errors.storeName.message}</p>
+                <p className="mt-0.5 text-[11px] text-red-500">{errors.storeName.message}</p>
               )}
             </div>
 
             <div>
               <label
                 htmlFor="store-category"
-                className="block text-xs font-semibold text-text-main mb-1.5"
+                className="block text-xs font-semibold text-text-main mb-1"
               >
                 Primary Product Category *
               </label>
               <select
                 id="store-category"
                 {...register("storeCategory")}
-                className={`w-full px-3.5 py-2.5 text-xs sm:text-sm text-text-main bg-white border rounded-xl focus:outline-hidden transition-all cursor-pointer ${
+                className={`w-full px-3 py-2 text-xs sm:text-sm text-text-main bg-white border rounded-xl focus:outline-hidden transition-all cursor-pointer ${
                   errors.storeCategory
                     ? "border-red-500 focus:ring-1 focus:ring-red-500"
                     : "border-border-light focus:border-brand focus:ring-1 focus:ring-brand"
@@ -450,27 +450,27 @@ export default function SellerOnboardingForm() {
                 ))}
               </select>
               {errors.storeCategory && (
-                <p className="mt-1 text-xs text-red-500">{errors.storeCategory.message}</p>
+                <p className="mt-0.5 text-[11px] text-red-500">{errors.storeCategory.message}</p>
               )}
             </div>
 
             <div>
               <label
                 htmlFor="store-address"
-                className="block text-xs font-semibold text-text-main mb-1.5"
+                className="block text-xs font-semibold text-text-main mb-1"
               >
                 Warehouse / Pickup Address *
               </label>
               <div className="relative">
-                <div className="absolute top-3 left-3.5 pointer-events-none text-text-muted">
+                <div className="absolute top-2.5 left-3 pointer-events-none text-text-muted">
                   <MapPin className="w-4 h-4" />
                 </div>
                 <textarea
                   id="store-address"
-                  rows={3}
+                  rows={2}
                   placeholder="Shop #, Market, Road, Area, City, District"
                   {...register("storeAddress")}
-                  className={`w-full pl-10 pr-3.5 py-2.5 text-xs sm:text-sm text-text-main bg-white border rounded-xl focus:outline-hidden transition-all ${
+                  className={`w-full pl-9 pr-3 py-2 text-xs sm:text-sm text-text-main bg-white border rounded-xl focus:outline-hidden transition-all ${
                     errors.storeAddress
                       ? "border-red-500 focus:ring-1 focus:ring-red-500"
                       : "border-border-light focus:border-brand focus:ring-1 focus:ring-brand"
@@ -478,15 +478,15 @@ export default function SellerOnboardingForm() {
                 />
               </div>
               {errors.storeAddress && (
-                <p className="mt-1 text-xs text-red-500">{errors.storeAddress.message}</p>
+                <p className="mt-0.5 text-[11px] text-red-500">{errors.storeAddress.message}</p>
               )}
             </div>
 
-            <div className="pt-4 flex items-center justify-between">
+            <div className="pt-2 flex items-center justify-between">
               <button
                 type="button"
                 onClick={prevStep}
-                className="px-5 py-2.5 border border-border-light text-text-main hover:bg-gray-50 text-xs sm:text-sm font-semibold rounded-xl flex items-center gap-2 transition-colors cursor-pointer"
+                className="px-4 py-2 border border-border-light text-text-main hover:bg-gray-50 text-xs sm:text-sm font-semibold rounded-xl flex items-center gap-1.5 transition-colors cursor-pointer"
               >
                 <ArrowLeft className="w-4 h-4" />
                 <span>Back</span>
@@ -494,7 +494,7 @@ export default function SellerOnboardingForm() {
               <button
                 type="button"
                 onClick={nextStep}
-                className="px-6 py-2.5 bg-brand hover:bg-brand-hover text-white text-xs sm:text-sm font-semibold rounded-xl flex items-center gap-2 transition-all cursor-pointer shadow-xs"
+                className="px-5 py-2 bg-brand hover:bg-brand-hover text-white text-xs sm:text-sm font-semibold rounded-xl flex items-center gap-2 transition-all cursor-pointer shadow-xs"
               >
                 <span>Continue to Verification</span>
                 <ArrowRight className="w-4 h-4" />
@@ -505,16 +505,16 @@ export default function SellerOnboardingForm() {
 
         {/* STEP 3: Legal & Payout Details */}
         {currentStep === 3 && (
-          <div className="space-y-4 animate-in fade-in duration-300">
+          <div className="space-y-3 animate-in fade-in duration-300">
             <div>
               <label
                 htmlFor="trade-license"
-                className="block text-xs font-semibold text-text-main mb-1.5"
+                className="block text-xs font-semibold text-text-main mb-1"
               >
                 Trade License or National ID (NID) Number *
               </label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-text-muted">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-text-muted">
                   <FileCheck2 className="w-4 h-4" />
                 </div>
                 <input
@@ -522,7 +522,7 @@ export default function SellerOnboardingForm() {
                   type="text"
                   placeholder="e.g. TRAD/DNCC/123456/2026 or NID"
                   {...register("tradeLicenseOrNid")}
-                  className={`w-full pl-10 pr-3.5 py-2.5 text-xs sm:text-sm text-text-main bg-white border rounded-xl focus:outline-hidden transition-all ${
+                  className={`w-full pl-9 pr-3 py-2 text-xs sm:text-sm text-text-main bg-white border rounded-xl focus:outline-hidden transition-all ${
                     errors.tradeLicenseOrNid
                       ? "border-red-500 focus:ring-1 focus:ring-red-500"
                       : "border-border-light focus:border-brand focus:ring-1 focus:ring-brand"
@@ -530,7 +530,7 @@ export default function SellerOnboardingForm() {
                 />
               </div>
               {errors.tradeLicenseOrNid && (
-                <p className="mt-1 text-xs text-red-500">
+                <p className="mt-0.5 text-[11px] text-red-500">
                   {errors.tradeLicenseOrNid.message}
                 </p>
               )}
@@ -539,12 +539,12 @@ export default function SellerOnboardingForm() {
             <div>
               <label
                 htmlFor="payout-account"
-                className="block text-xs font-semibold text-text-main mb-1.5"
+                className="block text-xs font-semibold text-text-main mb-1"
               >
                 Payout Method (Bank Account / bKash / Nagad) *
               </label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-text-muted">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-text-muted">
                   <CreditCard className="w-4 h-4" />
                 </div>
                 <input
@@ -552,7 +552,7 @@ export default function SellerOnboardingForm() {
                   type="text"
                   placeholder="e.g. Bank: City Bank A/C: 12345678 or bKash Merchant"
                   {...register("bankOrMobileAccount")}
-                  className={`w-full pl-10 pr-3.5 py-2.5 text-xs sm:text-sm text-text-main bg-white border rounded-xl focus:outline-hidden transition-all ${
+                  className={`w-full pl-9 pr-3 py-2 text-xs sm:text-sm text-text-main bg-white border rounded-xl focus:outline-hidden transition-all ${
                     errors.bankOrMobileAccount
                       ? "border-red-500 focus:ring-1 focus:ring-red-500"
                       : "border-border-light focus:border-brand focus:ring-1 focus:ring-brand"
@@ -560,13 +560,13 @@ export default function SellerOnboardingForm() {
                 />
               </div>
               {errors.bankOrMobileAccount && (
-                <p className="mt-1 text-xs text-red-500">
+                <p className="mt-0.5 text-[11px] text-red-500">
                   {errors.bankOrMobileAccount.message}
                 </p>
               )}
             </div>
 
-            <div className="p-4 bg-brand-surface rounded-2xl border border-border-light space-y-2">
+            <div className="p-3 bg-brand-surface rounded-xl border border-border-light space-y-1.5">
               <div className="flex items-start">
                 <input
                   id="agree-seller"
@@ -576,7 +576,7 @@ export default function SellerOnboardingForm() {
                 />
                 <label
                   htmlFor="agree-seller"
-                  className="ml-2.5 block text-xs text-text-muted leading-relaxed cursor-pointer"
+                  className="ml-2 block text-xs text-text-muted leading-relaxed cursor-pointer"
                 >
                   I certify that the information provided is accurate and agree to the{" "}
                   <span className="text-brand font-semibold hover:underline">
@@ -586,17 +586,17 @@ export default function SellerOnboardingForm() {
                 </label>
               </div>
               {errors.agreeToSellerAgreement && (
-                <p className="text-xs text-red-500 ml-6">
+                <p className="text-[11px] text-red-500 ml-6">
                   {errors.agreeToSellerAgreement.message}
                 </p>
               )}
             </div>
 
-            <div className="pt-4 flex items-center justify-between">
+            <div className="pt-2 flex items-center justify-between">
               <button
                 type="button"
                 onClick={prevStep}
-                className="px-5 py-2.5 border border-border-light text-text-main hover:bg-gray-50 text-xs sm:text-sm font-semibold rounded-xl flex items-center gap-2 transition-colors cursor-pointer"
+                className="px-4 py-2 border border-border-light text-text-main hover:bg-gray-50 text-xs sm:text-sm font-semibold rounded-xl flex items-center gap-1.5 transition-colors cursor-pointer"
               >
                 <ArrowLeft className="w-4 h-4" />
                 <span>Back</span>
@@ -604,7 +604,7 @@ export default function SellerOnboardingForm() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="px-8 py-2.5 bg-brand hover:bg-brand-hover text-white text-xs sm:text-sm font-bold rounded-xl flex items-center gap-2 transition-all cursor-pointer shadow-md disabled:opacity-70 disabled:cursor-not-allowed"
+                className="px-6 py-2 bg-brand hover:bg-brand-hover text-white text-xs sm:text-sm font-bold rounded-xl flex items-center gap-2 transition-all cursor-pointer shadow-md disabled:opacity-70 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? (
                   <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />

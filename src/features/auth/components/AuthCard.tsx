@@ -55,9 +55,9 @@ export default function AuthCard({ initialMode = "login" }: AuthCardProps) {
       </div>
 
       {/* Main Sliding Container */}
-      <div className="relative w-full min-h-[580px] sm:min-h-[640px] bg-white rounded-3xl shadow-xl border border-border-light overflow-hidden">
+      <div className="relative w-full min-h-[480px] sm:min-h-[520px] bg-white rounded-3xl shadow-xl border border-border-light overflow-hidden">
         {/* Desktop Sliding Split Panels */}
-        <div className="hidden lg:grid grid-cols-2 h-full min-h-[640px]">
+        <div className="hidden lg:grid grid-cols-2 h-full min-h-[520px]">
           {/* Left Form Area (Always renders RegisterForm when mode is register) */}
           <div
             className={`h-full flex items-center justify-center transition-opacity duration-500 ${
@@ -104,36 +104,36 @@ export default function AuthCard({ initialMode = "login" }: AuthCardProps) {
             <div className="absolute inset-0 bg-gradient-to-br from-brand/90 via-brand/80 to-brand-hover/95 backdrop-blur-[1px]" />
 
             {/* Overlay Content */}
-            <div className="relative z-10 h-full p-10 flex flex-col justify-between text-white select-none">
+            <div className="relative z-10 h-full p-6 sm:p-8 flex flex-col justify-between text-white select-none">
               {/* Top Brand Sparkle */}
               <div className="flex items-center gap-2">
-                <div className="p-2 bg-white/15 rounded-lg backdrop-blur-md">
-                  <Sparkles className="w-5 h-5 text-amber-300" />
+                <div className="p-1.5 bg-white/15 rounded-lg backdrop-blur-md">
+                  <Sparkles className="w-4 h-4 text-amber-300" />
                 </div>
-                <span className="text-xs uppercase tracking-widest font-bold text-white/90">
+                <span className="text-[11px] uppercase tracking-widest font-bold text-white/90">
                   eShopBD Experience
                 </span>
               </div>
 
               {/* Middle Dynamic Content based on Active Mode */}
-              <div className="space-y-4 my-auto">
+              <div className="space-y-3 my-auto">
                 {mode === "login" ? (
-                  <div className="animate-in fade-in slide-in-from-left-4 duration-500 space-y-3">
-                    <span className="px-3 py-1 bg-white/20 text-white rounded-full text-xs font-semibold backdrop-blur-xs">
+                  <div className="animate-in fade-in slide-in-from-left-4 duration-500 space-y-2.5">
+                    <span className="px-2.5 py-0.5 bg-white/20 text-white rounded-full text-[11px] font-semibold backdrop-blur-xs">
                       Exclusive Deals & Fast Shipping
                     </span>
-                    <h3 className="text-3xl font-black tracking-tight leading-tight">
+                    <h3 className="text-2xl sm:text-3xl font-black tracking-tight leading-tight">
                       New to eShopBD?
                     </h3>
-                    <p className="text-sm text-white/85 leading-relaxed font-normal max-w-sm">
+                    <p className="text-xs sm:text-sm text-white/85 leading-relaxed font-normal max-w-sm">
                       Create an account today to discover millions of authentic items,
                       track multi-vendor deliveries, and claim exclusive vouchers.
                     </p>
-                    <div className="pt-2">
+                    <div className="pt-1.5">
                       <button
                         type="button"
                         onClick={handleSwitchToRegister}
-                        className="inline-flex items-center gap-2 px-7 py-3 rounded-full border-2 border-white text-white font-bold text-sm hover:bg-white hover:text-brand transition-all cursor-pointer shadow-md hover:gap-3"
+                        className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border-2 border-white text-white font-bold text-xs sm:text-sm hover:bg-white hover:text-brand transition-all cursor-pointer shadow-md hover:gap-2.5"
                       >
                         <span>Create Account</span>
                         <ArrowRight className="w-4 h-4" />
@@ -141,22 +141,22 @@ export default function AuthCard({ initialMode = "login" }: AuthCardProps) {
                     </div>
                   </div>
                 ) : (
-                  <div className="animate-in fade-in slide-in-from-right-4 duration-500 space-y-3">
-                    <span className="px-3 py-1 bg-white/20 text-white rounded-full text-xs font-semibold backdrop-blur-xs">
+                  <div className="animate-in fade-in slide-in-from-right-4 duration-500 space-y-2.5">
+                    <span className="px-2.5 py-0.5 bg-white/20 text-white rounded-full text-[11px] font-semibold backdrop-blur-xs">
                       Welcome Back Shopper
                     </span>
-                    <h3 className="text-3xl font-black tracking-tight leading-tight">
+                    <h3 className="text-2xl sm:text-3xl font-black tracking-tight leading-tight">
                       Already a Member?
                     </h3>
-                    <p className="text-sm text-white/85 leading-relaxed font-normal max-w-sm">
+                    <p className="text-xs sm:text-sm text-white/85 leading-relaxed font-normal max-w-sm">
                       Sign in with your verified credentials to access your saved cart,
                       vendor communications, and recent order history.
                     </p>
-                    <div className="pt-2">
+                    <div className="pt-1.5">
                       <button
                         type="button"
                         onClick={handleSwitchToLogin}
-                        className="inline-flex items-center gap-2 px-7 py-3 rounded-full border-2 border-white text-white font-bold text-sm hover:bg-white hover:text-brand transition-all cursor-pointer shadow-md hover:gap-3"
+                        className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border-2 border-white text-white font-bold text-xs sm:text-sm hover:bg-white hover:text-brand transition-all cursor-pointer shadow-md hover:gap-2.5"
                       >
                         <ArrowLeft className="w-4 h-4" />
                         <span>Sign In</span>
@@ -167,7 +167,7 @@ export default function AuthCard({ initialMode = "login" }: AuthCardProps) {
               </div>
 
               {/* Bottom Trust Indicators */}
-              <div className="pt-6 border-t border-white/20 flex items-center justify-between text-xs text-white/80">
+              <div className="pt-4 border-t border-white/20 flex items-center justify-between text-xs text-white/80">
                 <div className="flex items-center gap-1.5">
                   <ShieldCheck className="w-4 h-4 text-emerald-300" />
                   <span>100% Secure Payments</span>

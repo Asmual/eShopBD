@@ -21,25 +21,25 @@ export default function AuthLayout({
       />
 
       {/* Top Header */}
-      <header className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex items-center justify-between">
+      <header className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 sm:py-3 flex items-center justify-between">
         <Logo size="md" />
 
         <Link
           href="/"
-          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-text-muted hover:text-brand bg-white border border-border-light rounded-lg shadow-2xs hover:border-brand/30 transition-all"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs sm:text-sm font-semibold text-text-muted hover:text-brand bg-white border border-border-light rounded-lg shadow-2xs hover:border-brand/30 transition-all"
         >
-          <ArrowLeft className="w-4 h-4" />
+          <ArrowLeft className="w-3.5 h-3.5" />
           <span>Back to Home</span>
         </Link>
       </header>
 
       {/* Main Content Area */}
-      <main className="relative z-10 flex-1 flex items-center justify-center p-4 sm:p-6 lg:p-8">
+      <main className="relative z-10 flex-1 flex items-center justify-center px-3 py-2 sm:px-6 sm:py-3">
         {children}
       </main>
 
       {/* Bottom Footer Copyright */}
-      <footer className="relative z-10 w-full py-4 text-center text-xs text-text-muted border-t border-border-light/60 bg-white/50 backdrop-blur-xs">
+      <footer className="relative z-10 w-full py-2 text-center text-xs text-text-muted border-t border-border-light/60 bg-white/50 backdrop-blur-xs">
         <p>&copy; {new Date().getFullYear()} eShopBD Marketplace. All rights reserved.</p>
       </footer>
     </div>

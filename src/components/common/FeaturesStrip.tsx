@@ -37,7 +37,7 @@ const FEATURES: FeatureItem[] = [
 
 export default function FeaturesStrip() {
   return (
-    <section aria-label="Customer Benefits and Trust Services" className="w-full bg-white">
+    <section aria-label="Customer Benefits and Trust Services" className="hidden md:block w-full bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-6">
         <div className="bg-brand-surface/70 border border-border-light rounded-xl shadow-2xs overflow-hidden">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-border-light">
