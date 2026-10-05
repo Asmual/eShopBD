@@ -1,7 +1,6 @@
+import React from "react";
+import AuthCard from "@/features/auth/components/AuthCard";
+
 export default function LoginPage() {
-  return (
-    <div>
-      <h1>Login</h1>
-    </div>
-  );
+  return <AuthCard initialMode="login" />;
 }

@@ -1,7 +1,6 @@
+import React from "react";
+import AuthCard from "@/features/auth/components/AuthCard";
+
 export default function RegisterPage() {
-  return (
-    <div>
-      <h1>Register</h1>
-    </div>
-  );
+  return <AuthCard initialMode="register" />;
 }
