@@ -17,22 +17,22 @@ export default function Logo({
 }: LogoProps) {
   const sizeConfig = {
     sm: {
-      container: "w-7 h-7 sm:w-8 sm:h-8",
-      imgPx: 32,
-      textClass: "text-base sm:text-lg",
-      subClass: "text-[8px] tracking-wider",
+      container: "w-6 h-6 sm:w-7.5 sm:h-7.5",
+      imgPx: 30,
+      textClass: "text-xs sm:text-base",
+      subClass: "text-[6.5px] sm:text-[8px] tracking-wider",
     },
     md: {
-      container: "w-9 h-9 sm:w-10 sm:h-10",
-      imgPx: 40,
-      textClass: "text-lg sm:text-xl",
-      subClass: "text-[9px] tracking-wider",
+      container: "w-7 h-7 sm:w-9.5 sm:h-9.5",
+      imgPx: 38,
+      textClass: "text-sm sm:text-lg",
+      subClass: "text-[7px] sm:text-[9px] tracking-wider",
     },
     lg: {
-      container: "w-14 h-14 sm:w-16 sm:h-16",
+      container: "w-12 h-12 sm:w-16 sm:h-16",
       imgPx: 64,
-      textClass: "text-2xl sm:text-3xl",
-      subClass: "text-xs tracking-widest",
+      textClass: "text-xl sm:text-3xl",
+      subClass: "text-[9px] sm:text-xs tracking-widest",
     },
   }[size];
 
@@ -42,7 +42,7 @@ export default function Logo({
   return (
     <Link
       href="/"
-      className={`inline-flex items-center gap-2.5 sm:gap-3 group focus:outline-hidden select-none ${className}`}
+      className={`inline-flex items-center gap-1.5 sm:gap-2.5 group focus:outline-hidden select-none ${className}`}
       aria-label="eShopBD Homepage"
     >
       {/* Brand Icon Image (Optimized & Balanced) */}

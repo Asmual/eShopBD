@@ -23,6 +23,7 @@ export default function TopNavbar({
   isMobileMenuOpen,
 }: TopNavbarProps) {
   const [searchQuery, setSearchQuery] = useState("");
+  const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
 
   const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -32,12 +33,12 @@ export default function TopNavbar({
 
   return (
     <div className="w-full bg-white border-b border-border-light">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-14 sm:h-16 gap-3 sm:gap-6">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-13 sm:h-16 gap-2 sm:gap-4 lg:gap-6">
           {/* Logo Section */}
           <Logo size="md" />
 
-          {/* Search Bar (Centered) */}
+          {/* Search Bar (Centered on Desktop) */}
           <div className="flex-1 max-w-xl mx-2 lg:mx-6 hidden md:block">
             <form
               onSubmit={handleSearchSubmit}
@@ -62,8 +63,22 @@ export default function TopNavbar({
           </div>
 
           {/* Right Action Icons & Auth */}
-          <div className="flex items-center gap-3 sm:gap-4 lg:gap-5 shrink-0">
-            {/* Track Order */}
+          <div className="flex items-center gap-2 sm:gap-4 lg:gap-5 shrink-0">
+            {/* Mobile Search Toggle Icon (Only on mobile) */}
+            <button
+              type="button"
+              onClick={() => setIsMobileSearchOpen((prev) => !prev)}
+              aria-label={isMobileSearchOpen ? "Close search bar" : "Open search bar"}
+              className="md:hidden p-1.5 text-text-main hover:text-brand transition-colors cursor-pointer"
+            >
+              {isMobileSearchOpen ? (
+                <X className="w-4.5 h-4.5 text-brand" />
+              ) : (
+                <Search className="w-4.5 h-4.5" />
+              )}
+            </button>
+
+            {/* Track Order (Desktop only) */}
             <Link
               href="/track-order"
               className="hidden lg:flex items-center gap-1.5 text-text-main hover:text-brand transition-colors text-xs sm:text-sm font-medium"
@@ -96,13 +111,13 @@ export default function TopNavbar({
               </span>
             </Link>
 
-            {/* Single Login / Sign Up Button */}
+            {/* Login / Sign Up */}
             <Link
               href="/login"
-              className="flex items-center gap-1.5 text-xs sm:text-sm font-medium text-text-main hover:text-brand transition-colors pl-2.5 sm:pl-3 border-l border-border-light"
+              className="hidden sm:flex items-center gap-1.5 text-xs sm:text-sm font-medium text-text-main hover:text-brand transition-colors pl-2.5 sm:pl-3 border-l border-border-light"
             >
               <User className="w-4 h-4 text-text-muted" />
-              <span className="hidden sm:inline">Login / Sign Up</span>
+              <span>Login / Sign Up</span>
             </Link>
 
             {/* Mobile Menu Toggle Button */}
@@ -121,29 +136,32 @@ export default function TopNavbar({
           </div>
         </div>
 
-        {/* Mobile Search Bar Row (Shown only on small screens) */}
-        <div className="pb-2 pt-0.5 md:hidden">
-          <form
-            onSubmit={handleSearchSubmit}
-            className="relative flex items-center w-full"
-          >
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search Product..."
-              aria-label="Search products"
-              className="w-full h-8.5 pl-3 pr-10 text-xs text-text-main bg-white border border-border-light rounded-lg focus:outline-hidden focus:border-brand placeholder:text-text-muted"
-            />
-            <button
-              type="submit"
-              aria-label="Search"
-              className="absolute right-1 w-7.5 h-6.5 bg-brand hover:bg-brand-hover text-white rounded-md flex items-center justify-center transition-colors"
+        {/* Expandable Mobile Search Bar (Only shown when mobile search icon is tapped) */}
+        {isMobileSearchOpen && (
+          <div className="pb-2.5 pt-1 md:hidden border-t border-border-light/60 animate-in fade-in slide-in-from-top-1 duration-200">
+            <form
+              onSubmit={handleSearchSubmit}
+              className="relative flex items-center w-full"
             >
-              <Search className="w-3.5 h-3.5" />
-            </button>
-          </form>
-        </div>
+              <input
+                type="text"
+                autoFocus
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search Product..."
+                aria-label="Search products"
+                className="w-full h-8.5 pl-3 pr-10 text-xs text-text-main bg-gray-50 border border-border-light rounded-lg focus:outline-hidden focus:border-brand focus:bg-white placeholder:text-text-muted"
+              />
+              <button
+                type="submit"
+                aria-label="Search"
+                className="absolute right-1 w-7.5 h-6.5 bg-brand hover:bg-brand-hover text-white rounded-md flex items-center justify-center transition-colors"
+              >
+                <Search className="w-3.5 h-3.5" />
+              </button>
+            </form>
+          </div>
+        )}
       </div>
     </div>
   );

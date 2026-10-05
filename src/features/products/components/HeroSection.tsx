@@ -7,7 +7,7 @@ import HeroCarousel from "./HeroCarousel";
 export default function HeroSection() {
   return (
     <section aria-label="Hero Showcase" className="w-full bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-3 pb-6">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 pt-2.5 sm:pt-3 pb-4 sm:pb-6">
         <div className="flex items-start gap-6">
           {/* Vertical Category Sidebar (Permanently fixed on Desktop) */}
           <div className="hidden lg:block shrink-0 w-64">
