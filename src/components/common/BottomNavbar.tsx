@@ -36,28 +36,28 @@ export default function BottomNavbar() {
             </Link>
 
             <Link
-              href="/products"
+              href="/categories"
               className="px-2.5 py-1 rounded-md text-xs sm:text-[13px] font-medium text-white/90 hover:text-white hover:bg-brand-hover transition-colors"
             >
               Categories
             </Link>
 
             <Link
-              href="/products?filter=new-arrival"
+              href="/new-arrivals"
               className="px-2.5 py-1 rounded-md text-xs sm:text-[13px] font-medium text-white/90 hover:text-white hover:bg-brand-hover transition-colors"
             >
               New Arrival
             </Link>
 
             <Link
-              href="/products?filter=best-sellers"
+              href="/best-sellers"
               className="px-2.5 py-1 rounded-md text-xs sm:text-[13px] font-medium text-white/90 hover:text-white hover:bg-brand-hover transition-colors"
             >
               Best Sellers
             </Link>
 
             <Link
-              href="/products?filter=mega-deals"
+              href="/mega-deals"
               className="px-2.5 py-1 rounded-md text-xs sm:text-[13px] font-medium text-white/90 hover:text-white hover:bg-brand-hover transition-colors relative group"
             >
               <span className="flex items-center gap-1">
@@ -70,17 +70,10 @@ export default function BottomNavbar() {
             </Link>
 
             <Link
-              href="/products?filter=offers"
+              href="/offers"
               className="px-2.5 py-1 rounded-md text-xs sm:text-[13px] font-medium text-white/90 hover:text-white hover:bg-brand-hover transition-colors"
             >
               Offers
-            </Link>
-
-            <Link
-              href="/become-seller"
-              className="px-2.5 py-1 rounded-md text-xs sm:text-[13px] font-medium text-white/90 hover:text-white hover:bg-brand-hover transition-colors"
-            >
-              Vendors
             </Link>
           </nav>
 

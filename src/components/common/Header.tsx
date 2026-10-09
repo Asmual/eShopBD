@@ -82,7 +82,7 @@ export default function Header() {
               </Link>
 
               <Link
-                href="/products"
+                href="/categories"
                 onClick={closeMobileMenu}
                 className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-text-main hover:bg-brand-light hover:text-brand transition-colors"
               >
@@ -91,7 +91,7 @@ export default function Header() {
               </Link>
 
               <Link
-                href="/products?filter=new-arrival"
+                href="/new-arrivals"
                 onClick={closeMobileMenu}
                 className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-text-main hover:bg-brand-light hover:text-brand transition-colors"
               >
@@ -100,7 +100,7 @@ export default function Header() {
               </Link>
 
               <Link
-                href="/products?filter=best-sellers"
+                href="/best-sellers"
                 onClick={closeMobileMenu}
                 className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-text-main hover:bg-brand-light hover:text-brand transition-colors"
               >
@@ -109,7 +109,7 @@ export default function Header() {
               </Link>
 
               <Link
-                href="/products?filter=mega-deals"
+                href="/mega-deals"
                 onClick={closeMobileMenu}
                 className="flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium text-text-main hover:bg-brand-light hover:text-brand transition-colors"
               >
@@ -123,7 +123,7 @@ export default function Header() {
               </Link>
 
               <Link
-                href="/products?filter=offers"
+                href="/offers"
                 onClick={closeMobileMenu}
                 className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-text-main hover:bg-brand-light hover:text-brand transition-colors"
               >
