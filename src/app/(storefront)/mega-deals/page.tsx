@@ -196,9 +196,9 @@ export default function MegaDealsPage() {
           totalCount={megaDeals.length}
         />
 
-        {/* Product Cards Grid with Deal Progress Bar */}
+        {/* Product Cards Grid with Deal Progress Bar (5 columns on desktop) */}
         {megaDeals.length > 0 ? (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
             {megaDeals.map((product, idx) => (
               <ProductCard
                 key={product.id}

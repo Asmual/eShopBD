@@ -28,9 +28,9 @@ export default function ProductCard({
     e.stopPropagation();
     setIsWishlisted((prev) => !prev);
     if (!isWishlisted) {
-      toast.success(`${product.name.slice(0, 24)}... added to Wishlist!`);
+      toast.success(`${product.name.slice(0, 20)}... added to Wishlist!`);
     } else {
-      toast(`${product.name.slice(0, 24)}... removed from Wishlist`);
+      toast(`${product.name.slice(0, 20)}... removed from Wishlist`);
     }
   };
 
@@ -38,46 +38,46 @@ export default function ProductCard({
     e.preventDefault();
     e.stopPropagation();
     setIsAdded(true);
-    toast.success(`${product.name.slice(0, 24)}... added to Cart!`);
+    toast.success(`${product.name.slice(0, 20)}... added to Cart!`);
     setTimeout(() => setIsAdded(false), 2000);
   };
 
   const handleBuyNow = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    toast.success(`Proceeding to checkout for ${product.name.slice(0, 20)}...`);
+    toast.success(`Checking out ${product.name.slice(0, 18)}...`);
     router.push(`/checkout?productId=${product.id}`);
   };
 
   return (
-    <div className="group relative flex flex-col bg-white rounded-2xl border border-border-light hover:border-brand/40 shadow-2xs hover:shadow-md transition-all duration-300 overflow-hidden">
-      {/* Product Image Area */}
-      <div className="relative w-full aspect-square bg-gray-50/80 overflow-hidden flex items-center justify-center">
+    <div className="group relative flex flex-col bg-white rounded-xl sm:rounded-2xl border border-border-light hover:border-brand/40 shadow-2xs hover:shadow-md transition-all duration-300 overflow-hidden">
+      {/* Product Image Area - Compact aspect-ratio so the card is not overly tall */}
+      <div className="relative w-full aspect-[4/3] sm:aspect-[1.15/1] bg-gray-50/90 overflow-hidden flex items-center justify-center">
         <Link href={`/products/${product.slug}`} className="w-full h-full block relative">
           <Image
             src={product.image}
             alt={product.name}
             fill
-            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw"
             priority={priority}
             className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
           />
         </Link>
 
-        {/* Top-Right Badge: Discount percentage or Custom Tag */}
+        {/* Top-Right Badge: Discount percentage */}
         {product.discountPercent > 0 && (
-          <div className="absolute top-2.5 right-2.5 z-10">
-            <span className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-brand text-white flex flex-col items-center justify-center text-[10px] sm:text-[11px] font-black leading-none shadow-sm border border-white/40">
+          <div className="absolute top-2 right-2 z-10">
+            <span className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-brand text-white flex flex-col items-center justify-center text-[9px] sm:text-[10px] font-black leading-none shadow-xs border border-white/40">
               <span>{product.discountPercent}%</span>
-              <span className="text-[7.5px] uppercase font-bold tracking-tight">OFF</span>
+              <span className="text-[6.5px] uppercase font-bold tracking-tighter">OFF</span>
             </span>
           </div>
         )}
 
         {/* Top-Left Status / Category Badge (e.g. HOT, NEW, BEST SELLER) */}
         {product.badge && product.discountPercent === 0 && (
-          <div className="absolute top-2.5 left-2.5 z-10">
-            <span className="px-2 py-0.5 rounded-md bg-amber-500 text-white text-[10px] font-bold uppercase tracking-wider shadow-2xs">
+          <div className="absolute top-2 left-2 z-10">
+            <span className="px-1.5 py-0.5 rounded-md bg-amber-500 text-white text-[9px] font-bold uppercase tracking-wider shadow-2xs">
               {product.badge}
             </span>
           </div>
@@ -88,40 +88,40 @@ export default function ProductCard({
           type="button"
           onClick={handleToggleWishlist}
           aria-label={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
-          className={`absolute top-2.5 left-2.5 z-10 w-8 h-8 rounded-full flex items-center justify-center transition-all shadow-2xs cursor-pointer ${
+          className={`absolute top-2 left-2 z-10 w-7 h-7 sm:w-7.5 sm:h-7.5 rounded-full flex items-center justify-center transition-all shadow-2xs cursor-pointer ${
             isWishlisted
               ? "bg-red-50 text-red-500 hover:bg-red-100"
               : "bg-white/90 text-text-muted hover:text-red-500 hover:bg-white"
           }`}
         >
-          <Heart className={`w-4 h-4 ${isWishlisted ? "fill-current text-red-500" : ""}`} />
+          <Heart className={`w-3.5 h-3.5 ${isWishlisted ? "fill-current text-red-500" : ""}`} />
         </button>
       </div>
 
-      {/* Content Section */}
-      <div className="p-3 sm:p-4 flex flex-col flex-1 justify-between">
+      {/* Content Section - Compact and Proportional */}
+      <div className="p-2.5 sm:p-3 flex flex-col flex-1 justify-between gap-2">
         <div>
           {/* Category Tag */}
-          <span className="text-[10px] sm:text-[11px] font-semibold text-text-muted uppercase tracking-wider block">
+          <span className="text-[9px] sm:text-[10px] font-bold text-text-muted uppercase tracking-wider block truncate">
             {product.categoryName}
           </span>
 
           {/* Product Title */}
           <Link
             href={`/products/${product.slug}`}
-            className="mt-1 block text-xs sm:text-sm font-bold text-text-main line-clamp-2 hover:text-brand transition-colors leading-snug"
+            className="mt-0.5 block text-xs sm:text-[13px] font-bold text-text-main line-clamp-1 hover:text-brand transition-colors leading-tight"
             title={product.name}
           >
             {product.name}
           </Link>
 
-          {/* Ratings & Sold Count */}
-          <div className="mt-1.5 flex items-center gap-1.5 flex-wrap">
+          {/* Ratings & Count */}
+          <div className="mt-1 flex items-center gap-1">
             <div className="flex items-center text-amber-400">
               {[...Array(5)].map((_, i) => (
                 <Star
                   key={i}
-                  className={`w-3 h-3 ${
+                  className={`w-2.5 h-2.5 sm:w-3 sm:h-3 ${
                     i < Math.floor(product.rating)
                       ? "fill-current text-amber-400"
                       : "text-gray-200 fill-gray-200"
@@ -129,24 +129,24 @@ export default function ProductCard({
                 />
               ))}
             </div>
-            <span className="text-[10px] sm:text-xs font-bold text-text-main">
+            <span className="text-[9px] sm:text-[10px] font-bold text-text-main">
               {product.rating.toFixed(1)}
             </span>
-            <span className="text-[10px] sm:text-xs text-text-muted">
+            <span className="text-[9px] sm:text-[10px] text-text-muted">
               ({product.reviewsCount})
             </span>
           </div>
 
           {/* Deal Progress (For Mega Deals / Flash Sales) */}
           {showDealProgress && product.claimedPercent && (
-            <div className="mt-2.5">
-              <div className="flex items-center justify-between text-[10px] font-semibold text-text-muted mb-1">
+            <div className="mt-1.5">
+              <div className="flex items-center justify-between text-[9px] font-semibold text-text-muted mb-0.5">
                 <span>Sold: {product.soldCount}</span>
-                <span className="text-orange-600 font-bold">{product.claimedPercent}% Claimed</span>
+                <span className="text-orange-600 font-bold">{product.claimedPercent}%</span>
               </div>
-              <div className="w-full h-1.5 bg-gray-100 rounded-full overflow-hidden">
+              <div className="w-full h-1 bg-gray-100 rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-gradient-to-r from-orange-500 to-amber-400 rounded-full transition-all duration-500"
+                  className="h-full bg-gradient-to-r from-orange-500 to-amber-400 rounded-full"
                   style={{ width: `${product.claimedPercent}%` }}
                 />
               </div>
@@ -154,12 +154,12 @@ export default function ProductCard({
           )}
 
           {/* Pricing Row */}
-          <div className="mt-2.5 flex items-baseline gap-2 flex-wrap">
-            <span className="text-sm sm:text-base lg:text-lg font-black text-brand">
+          <div className="mt-1.5 flex items-baseline gap-1.5 flex-wrap">
+            <span className="text-xs sm:text-sm lg:text-[15px] font-black text-brand">
               ৳{product.price.toLocaleString()}
             </span>
             {product.originalPrice > product.price && (
-              <span className="text-[11px] sm:text-xs text-text-muted line-through">
+              <span className="text-[10px] sm:text-[11px] text-text-muted line-through">
                 ৳{product.originalPrice.toLocaleString()}
               </span>
             )}
@@ -167,13 +167,13 @@ export default function ProductCard({
         </div>
 
         {/* Action Buttons: Add to Cart & Buy Now */}
-        <div className="mt-3.5 pt-3 border-t border-border-light/60 grid grid-cols-2 gap-1.5 sm:gap-2">
+        <div className="pt-2 border-t border-border-light/60 grid grid-cols-2 gap-1.5">
           {/* Add to Cart Button */}
           <button
             type="button"
             onClick={handleAddToCart}
             aria-label={`Add ${product.name} to cart`}
-            className={`flex items-center justify-center gap-1 sm:gap-1.5 py-1.5 sm:py-2 px-2 rounded-lg text-[11px] sm:text-xs font-bold transition-all cursor-pointer ${
+            className={`flex items-center justify-center gap-1 py-1.5 px-1.5 rounded-lg text-[10px] sm:text-[11px] font-bold transition-all cursor-pointer ${
               isAdded
                 ? "bg-emerald-600 text-white"
                 : "bg-brand hover:bg-brand-hover text-white active:scale-98"
@@ -181,12 +181,12 @@ export default function ProductCard({
           >
             {isAdded ? (
               <>
-                <Check className="w-3.5 h-3.5" />
+                <Check className="w-3 h-3 shrink-0" />
                 <span className="truncate">Added</span>
               </>
             ) : (
               <>
-                <ShoppingCart className="w-3.5 h-3.5" />
+                <ShoppingCart className="w-3 h-3 shrink-0" />
                 <span className="truncate">Add to Cart</span>
               </>
             )}
@@ -197,9 +197,9 @@ export default function ProductCard({
             type="button"
             onClick={handleBuyNow}
             aria-label={`Buy ${product.name} now`}
-            className="flex items-center justify-center gap-1 sm:gap-1.5 py-1.5 sm:py-2 px-2 rounded-lg bg-text-main hover:bg-black text-white text-[11px] sm:text-xs font-bold transition-all active:scale-98 cursor-pointer shadow-2xs"
+            className="flex items-center justify-center gap-1 py-1.5 px-1.5 rounded-lg bg-text-main hover:bg-black text-white text-[10px] sm:text-[11px] font-bold transition-all active:scale-98 cursor-pointer shadow-2xs"
           >
-            <Zap className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
+            <Zap className="w-3 h-3 text-amber-400 fill-amber-400 shrink-0" />
             <span className="truncate">Buy Now</span>
           </button>
         </div>

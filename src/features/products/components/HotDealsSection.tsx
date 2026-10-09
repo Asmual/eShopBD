@@ -37,8 +37,8 @@ export default function HotDealsSection() {
           </Link>
         </div>
 
-        {/* Product Cards Responsive Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-5">
+        {/* Product Cards Responsive Grid (5 columns on desktop) */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
           {hotDeals.map((product, idx) => (
             <ProductCard
               key={product.id}
