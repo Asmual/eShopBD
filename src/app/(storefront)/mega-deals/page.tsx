@@ -102,12 +102,12 @@ export default function MegaDealsPage() {
           <span className="text-text-main font-semibold">Mega Deals</span>
         </nav>
 
-        {/* Hero Header Banner with Live Countdown Timer */}
-        <div className="bg-gradient-to-r from-red-600 via-orange-600 to-amber-600 rounded-2xl p-6 sm:p-10 text-white mb-6 sm:mb-8 shadow-sm relative overflow-hidden">
+        {/* Hero Header Banner with Live Countdown Timer (Website Brand Theme) */}
+        <div className="bg-gradient-to-r from-brand via-brand-hover to-[#093522] rounded-2xl p-6 sm:p-10 text-white mb-6 sm:mb-8 shadow-sm relative overflow-hidden">
           <div className="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
             <div className="max-w-xl">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 text-white text-xs font-black uppercase tracking-wider mb-3 backdrop-blur-xs">
-                <Flame className="w-4 h-4 fill-current text-yellow-300" />
+                <Flame className="w-4 h-4 fill-current text-white" />
                 <span>Lightning Flash Deals 2026</span>
               </div>
               <h1 className="text-2xl sm:text-4xl font-black tracking-tight">
@@ -119,28 +119,28 @@ export default function MegaDealsPage() {
             </div>
 
             {/* Countdown Box */}
-            <div className="bg-black/30 backdrop-blur-md rounded-2xl p-4 sm:p-5 border border-white/20 shrink-0 text-center">
-              <div className="flex items-center justify-center gap-1.5 text-xs font-bold uppercase tracking-wider text-yellow-300 mb-2.5">
-                <Timer className="w-4 h-4" />
+            <div className="bg-black/25 backdrop-blur-md rounded-2xl p-4 sm:p-5 border border-white/20 shrink-0 text-center">
+              <div className="flex items-center justify-center gap-1.5 text-xs font-bold uppercase tracking-wider text-white/95 mb-2.5">
+                <Timer className="w-4 h-4 text-white" />
                 <span>Deals Expire In</span>
               </div>
               <div className="flex items-center justify-center gap-2">
                 <div className="flex flex-col items-center">
-                  <span className="w-12 h-12 rounded-xl bg-white text-text-main text-xl font-black flex items-center justify-center shadow-md">
+                  <span className="w-12 h-12 rounded-xl bg-white text-brand text-xl font-black flex items-center justify-center shadow-md">
                     {formatNumber(timeLeft.hours)}
                   </span>
                   <span className="text-[10px] font-bold text-white/80 mt-1 uppercase">Hours</span>
                 </div>
                 <span className="text-2xl font-black text-white/80 -mt-4">:</span>
                 <div className="flex flex-col items-center">
-                  <span className="w-12 h-12 rounded-xl bg-white text-text-main text-xl font-black flex items-center justify-center shadow-md">
+                  <span className="w-12 h-12 rounded-xl bg-white text-brand text-xl font-black flex items-center justify-center shadow-md">
                     {formatNumber(timeLeft.minutes)}
                   </span>
                   <span className="text-[10px] font-bold text-white/80 mt-1 uppercase">Mins</span>
                 </div>
                 <span className="text-2xl font-black text-white/80 -mt-4">:</span>
                 <div className="flex flex-col items-center">
-                  <span className="w-12 h-12 rounded-xl bg-white text-text-main text-xl font-black flex items-center justify-center shadow-md">
+                  <span className="w-12 h-12 rounded-xl bg-white text-brand text-xl font-black flex items-center justify-center shadow-md">
                     {formatNumber(timeLeft.seconds)}
                   </span>
                   <span className="text-[10px] font-bold text-white/80 mt-1 uppercase">Secs</span>
@@ -151,10 +151,10 @@ export default function MegaDealsPage() {
           <div className="absolute -right-8 -bottom-8 w-60 h-60 bg-white/10 rounded-full blur-2xl pointer-events-none" />
         </div>
 
-        {/* Value Highlights Strip */}
+        {/* Value Highlights Strip (Brand Colors) */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-8">
           <div className="bg-white rounded-xl p-3.5 border border-border-light flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg bg-orange-50 text-orange-600 flex items-center justify-center shrink-0">
+            <div className="w-9 h-9 rounded-lg bg-brand-light text-brand flex items-center justify-center shrink-0">
               <Zap className="w-4 h-4 fill-current" />
             </div>
             <div>
@@ -164,7 +164,7 @@ export default function MegaDealsPage() {
           </div>
 
           <div className="bg-white rounded-xl p-3.5 border border-border-light flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg bg-orange-50 text-orange-600 flex items-center justify-center shrink-0">
+            <div className="w-9 h-9 rounded-lg bg-brand-light text-brand flex items-center justify-center shrink-0">
               <Tag className="w-4 h-4" />
             </div>
             <div>
@@ -174,7 +174,7 @@ export default function MegaDealsPage() {
           </div>
 
           <div className="bg-white rounded-xl p-3.5 border border-border-light flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg bg-orange-50 text-orange-600 flex items-center justify-center shrink-0">
+            <div className="w-9 h-9 rounded-lg bg-brand-light text-brand flex items-center justify-center shrink-0">
               <Flame className="w-4 h-4 fill-current" />
             </div>
             <div>
