@@ -46,8 +46,8 @@ const CATEGORIES_SHOWCASE: CategoryShowcaseItem[] = [
     id: "cat-electronics",
     name: "Electronics",
     slug: "electronics",
-    image: "/images/categories/category-electronics.jpg",
-    href: "/products?category=electronics",
+    image: "/images/products/electronics/electronics-8.jpg",
+    href: "/electronics",
   },
 ];
 
