@@ -63,35 +63,30 @@ function ProductsCatalogContent() {
   }, [selectedCategory, searchQuery, sortBy]);
 
   return (
-    <div className="w-full bg-brand-surface/40 min-h-screen py-6 sm:py-10">
+    <div className="w-full bg-brand-surface/40 min-h-screen pt-2 sm:pt-3 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Breadcrumb Navigation */}
-        <nav
-          aria-label="Breadcrumb"
-          className="flex items-center gap-2 text-xs text-text-muted mb-4 sm:mb-6"
-        >
-          <Link href="/" className="hover:text-brand transition-colors">
-            Home
-          </Link>
-          <ChevronRight className="w-3.5 h-3.5" />
-          <span className="text-text-main font-semibold">Products Catalog</span>
-        </nav>
-
-        {/* Page Header */}
-        <div className="bg-gradient-to-r from-brand to-brand-hover rounded-2xl p-6 sm:p-10 text-white mb-6 sm:mb-8 shadow-sm relative overflow-hidden">
-          <div className="relative z-10 max-w-2xl">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 text-white text-xs font-bold uppercase tracking-wider mb-3 backdrop-blur-xs">
-              <ShoppingBag className="w-3.5 h-3.5" />
-              <span>Full Marketplace Catalog</span>
-            </div>
-            <h1 className="text-2xl sm:text-4xl font-black tracking-tight">
-              All Products & Collections
-            </h1>
-            <p className="mt-2 text-xs sm:text-sm text-white/90 leading-relaxed">
-              Explore thousands of verified items from authentic brands and trusted vendors. Shop with secure checkout, fast dispatch, and guaranteed quality.
-            </p>
+        {/* Compact Page Header & Breadcrumbs */}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5 py-1.5 mb-3 border-b border-border-light">
+          <div className="flex flex-wrap items-center gap-2">
+            <nav
+              aria-label="Breadcrumb"
+              className="flex items-center gap-1.5 text-xs text-text-muted"
+            >
+              <Link href="/" className="hover:text-brand transition-colors">
+                Home
+              </Link>
+              <ChevronRight className="w-3.5 h-3.5" />
+              <span className="text-text-main font-semibold">Products Catalog</span>
+            </nav>
+            <span className="text-border-light hidden sm:inline">|</span>
+            <span className="inline-flex items-center gap-1.5 text-xs font-semibold px-2 py-0.5 rounded-full bg-brand-light text-brand">
+              <ShoppingBag className="w-3 h-3" />
+              <span>{filteredProducts.length} Items Available</span>
+            </span>
           </div>
-          <div className="absolute -right-8 -bottom-8 w-60 h-60 bg-white/5 rounded-full blur-2xl pointer-events-none" />
+          <p className="text-[11px] sm:text-xs text-text-muted hidden md:block">
+            Verified authentic brands & fast dispatch across Bangladesh
+          </p>
         </div>
 
         {/* Dynamic Filter and Sort Bar */}

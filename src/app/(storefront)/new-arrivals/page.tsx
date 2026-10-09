@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo } from "react";
 import Link from "next/link";
-import { Sparkles, ChevronRight, Clock, ShieldCheck, Truck } from "lucide-react";
+import { Sparkles, ChevronRight } from "lucide-react";
 import ProductCard from "@/features/products/components/ProductCard";
 import ProductFilterBar from "@/features/products/components/ProductFilterBar";
 import EmptyState from "@/components/common/EmptyState";
@@ -62,68 +62,30 @@ export default function NewArrivalsPage() {
   }, [selectedCategory, searchQuery, sortBy]);
 
   return (
-    <div className="w-full bg-brand-surface/40 min-h-screen py-6 sm:py-10">
+    <div className="w-full bg-brand-surface/40 min-h-screen pt-2 sm:pt-3 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Breadcrumb Navigation */}
-        <nav
-          aria-label="Breadcrumb"
-          className="flex items-center gap-2 text-xs text-text-muted mb-4 sm:mb-6"
-        >
-          <Link href="/" className="hover:text-brand transition-colors">
-            Home
-          </Link>
-          <ChevronRight className="w-3.5 h-3.5" />
-          <span className="text-text-main font-semibold">New Arrivals</span>
-        </nav>
-
-        {/* Hero Header Banner */}
-        <div className="bg-gradient-to-r from-emerald-800 via-brand to-teal-800 rounded-2xl p-6 sm:p-10 text-white mb-6 sm:mb-8 shadow-sm relative overflow-hidden">
-          <div className="relative z-10 max-w-2xl">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-400 text-text-main text-xs font-black uppercase tracking-wider mb-3">
-              <Sparkles className="w-3.5 h-3.5 fill-current" />
+        {/* Compact Page Header & Breadcrumbs (Brand Green Theme) */}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5 py-1.5 mb-3 border-b border-border-light">
+          <div className="flex flex-wrap items-center gap-2">
+            <nav
+              aria-label="Breadcrumb"
+              className="flex items-center gap-1.5 text-xs text-text-muted"
+            >
+              <Link href="/" className="hover:text-brand transition-colors">
+                Home
+              </Link>
+              <ChevronRight className="w-3.5 h-3.5" />
+              <span className="text-text-main font-semibold">New Arrivals</span>
+            </nav>
+            <span className="text-border-light hidden sm:inline">|</span>
+            <span className="inline-flex items-center gap-1.5 text-xs font-semibold px-2 py-0.5 rounded-full bg-brand-light text-brand">
+              <Sparkles className="w-3 h-3" />
               <span>Season Fresh Drops 2026</span>
-            </div>
-            <h1 className="text-2xl sm:text-4xl font-black tracking-tight">
-              New Arrivals Collection
-            </h1>
-            <p className="mt-2 text-xs sm:text-sm text-white/90 leading-relaxed">
-              Discover the latest trends, newly released electronics, and seasonal fashion essentials. Handpicked daily directly from top brands and verified sellers.
-            </p>
+            </span>
           </div>
-          <div className="absolute -right-8 -bottom-8 w-60 h-60 bg-white/10 rounded-full blur-2xl pointer-events-none" />
-        </div>
-
-        {/* Value Highlights Strip */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-8">
-          <div className="bg-white rounded-xl p-3.5 border border-border-light flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg bg-emerald-50 text-brand flex items-center justify-center shrink-0">
-              <Clock className="w-4 h-4" />
-            </div>
-            <div>
-              <h4 className="text-xs font-bold text-text-main">Updated Daily</h4>
-              <p className="text-[11px] text-text-muted">Fresh catalogs listed every 24 hours</p>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-xl p-3.5 border border-border-light flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg bg-emerald-50 text-brand flex items-center justify-center shrink-0">
-              <ShieldCheck className="w-4 h-4" />
-            </div>
-            <div>
-              <h4 className="text-xs font-bold text-text-main">100% Authentic</h4>
-              <p className="text-[11px] text-text-muted">Direct from authorized manufacturers</p>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-xl p-3.5 border border-border-light flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg bg-emerald-50 text-brand flex items-center justify-center shrink-0">
-              <Truck className="w-4 h-4" />
-            </div>
-            <div>
-              <h4 className="text-xs font-bold text-text-main">Priority Dispatch</h4>
-              <p className="text-[11px] text-text-muted">Same-day packaging on new arrivals</p>
-            </div>
-          </div>
+          <p className="text-[11px] sm:text-xs text-text-muted hidden md:block">
+            {newArrivals.length} freshly curated items • Handpicked daily
+          </p>
         </div>
 
         {/* Dynamic Filter and Sort Bar */}

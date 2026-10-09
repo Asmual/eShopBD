@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo } from "react";
 import Link from "next/link";
-import { Award, ChevronRight, TrendingUp, ThumbsUp, Star } from "lucide-react";
+import { Award, ChevronRight } from "lucide-react";
 import ProductCard from "@/features/products/components/ProductCard";
 import ProductFilterBar from "@/features/products/components/ProductFilterBar";
 import EmptyState from "@/components/common/EmptyState";
@@ -65,68 +65,30 @@ export default function BestSellersPage() {
   }, [selectedCategory, searchQuery, sortBy]);
 
   return (
-    <div className="w-full bg-brand-surface/40 min-h-screen py-6 sm:py-10">
+    <div className="w-full bg-brand-surface/40 min-h-screen pt-2 sm:pt-3 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Breadcrumb Navigation */}
-        <nav
-          aria-label="Breadcrumb"
-          className="flex items-center gap-2 text-xs text-text-muted mb-4 sm:mb-6"
-        >
-          <Link href="/" className="hover:text-brand transition-colors">
-            Home
-          </Link>
-          <ChevronRight className="w-3.5 h-3.5" />
-          <span className="text-text-main font-semibold">Best Sellers</span>
-        </nav>
-
-        {/* Hero Header Banner */}
-        <div className="bg-gradient-to-r from-amber-600 via-orange-600 to-amber-700 rounded-2xl p-6 sm:p-10 text-white mb-6 sm:mb-8 shadow-sm relative overflow-hidden">
-          <div className="relative z-10 max-w-2xl">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 text-white text-xs font-black uppercase tracking-wider mb-3 backdrop-blur-xs">
-              <Award className="w-4 h-4 fill-current" />
-              <span>Community Favorite Top Ranked</span>
-            </div>
-            <h1 className="text-2xl sm:text-4xl font-black tracking-tight">
-              Best Sellers Leaderboard
-            </h1>
-            <p className="mt-2 text-xs sm:text-sm text-white/90 leading-relaxed">
-              Explore our most purchased and highly recommended products. Loved by thousands of customers nationwide for unmatched durability, style, and performance.
-            </p>
+        {/* Compact Page Header & Breadcrumbs (Brand Green Theme) */}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5 py-1.5 mb-3 border-b border-border-light">
+          <div className="flex flex-wrap items-center gap-2">
+            <nav
+              aria-label="Breadcrumb"
+              className="flex items-center gap-1.5 text-xs text-text-muted"
+            >
+              <Link href="/" className="hover:text-brand transition-colors">
+                Home
+              </Link>
+              <ChevronRight className="w-3.5 h-3.5" />
+              <span className="text-text-main font-semibold">Best Sellers</span>
+            </nav>
+            <span className="text-border-light hidden sm:inline">|</span>
+            <span className="inline-flex items-center gap-1.5 text-xs font-semibold px-2 py-0.5 rounded-full bg-brand-light text-brand">
+              <Award className="w-3.5 h-3.5" />
+              <span>Top Rated & Most Popular</span>
+            </span>
           </div>
-          <div className="absolute -right-8 -bottom-8 w-60 h-60 bg-white/10 rounded-full blur-2xl pointer-events-none" />
-        </div>
-
-        {/* Stats Highlight Bar */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-8">
-          <div className="bg-white rounded-xl p-3.5 border border-border-light flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
-              <TrendingUp className="w-4 h-4" />
-            </div>
-            <div>
-              <h4 className="text-xs font-bold text-text-main">50,000+ Orders</h4>
-              <p className="text-[11px] text-text-muted">Successfully fulfilled across Bangladesh</p>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-xl p-3.5 border border-border-light flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
-              <Star className="w-4 h-4 fill-current" />
-            </div>
-            <div>
-              <h4 className="text-xs font-bold text-text-main">4.8+ Rating Average</h4>
-              <p className="text-[11px] text-text-muted">Based on 12,000+ verified customer reviews</p>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-xl p-3.5 border border-border-light flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
-              <ThumbsUp className="w-4 h-4" />
-            </div>
-            <div>
-              <h4 className="text-xs font-bold text-text-main">98% Recommendation</h4>
-              <p className="text-[11px] text-text-muted">Verified buyer satisfaction guarantee</p>
-            </div>
-          </div>
+          <p className="text-[11px] sm:text-xs text-text-muted hidden md:block">
+            {bestSellers.length} community favorite items • 4.8★ customer satisfaction
+          </p>
         </div>
 
         {/* Filter and Sort Bar */}

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
-import { Flame, ChevronRight, Timer, Zap, Tag } from "lucide-react";
+import { Flame, ChevronRight, Timer } from "lucide-react";
 import ProductCard from "@/features/products/components/ProductCard";
 import ProductFilterBar from "@/features/products/components/ProductFilterBar";
 import EmptyState from "@/components/common/EmptyState";
@@ -88,99 +88,37 @@ export default function MegaDealsPage() {
   const formatNumber = (n: number) => n.toString().padStart(2, "0");
 
   return (
-    <div className="w-full bg-brand-surface/40 min-h-screen py-6 sm:py-10">
+    <div className="w-full bg-brand-surface/40 min-h-screen pt-2 sm:pt-3 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Breadcrumb Navigation */}
-        <nav
-          aria-label="Breadcrumb"
-          className="flex items-center gap-2 text-xs text-text-muted mb-4 sm:mb-6"
-        >
-          <Link href="/" className="hover:text-brand transition-colors">
-            Home
-          </Link>
-          <ChevronRight className="w-3.5 h-3.5" />
-          <span className="text-text-main font-semibold">Mega Deals</span>
-        </nav>
-
-        {/* Hero Header Banner with Live Countdown Timer (Website Brand Theme) */}
-        <div className="bg-gradient-to-r from-brand via-brand-hover to-[#093522] rounded-2xl p-6 sm:p-10 text-white mb-6 sm:mb-8 shadow-sm relative overflow-hidden">
-          <div className="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
-            <div className="max-w-xl">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 text-white text-xs font-black uppercase tracking-wider mb-3 backdrop-blur-xs">
-                <Flame className="w-4 h-4 fill-current text-white" />
-                <span>Lightning Flash Deals 2026</span>
-              </div>
-              <h1 className="text-2xl sm:text-4xl font-black tracking-tight">
-                Mega Deals & Super Flash Sales
-              </h1>
-              <p className="mt-2 text-xs sm:text-sm text-white/90 leading-relaxed">
-                Save up to 50% on top electronics, branded fashion, and trending gadgets. Limited inventory with claim limits—grab yours before the timer expires!
-              </p>
-            </div>
-
-            {/* Countdown Box */}
-            <div className="bg-black/25 backdrop-blur-md rounded-2xl p-4 sm:p-5 border border-white/20 shrink-0 text-center">
-              <div className="flex items-center justify-center gap-1.5 text-xs font-bold uppercase tracking-wider text-white/95 mb-2.5">
-                <Timer className="w-4 h-4 text-white" />
-                <span>Deals Expire In</span>
-              </div>
-              <div className="flex items-center justify-center gap-2">
-                <div className="flex flex-col items-center">
-                  <span className="w-12 h-12 rounded-xl bg-white text-brand text-xl font-black flex items-center justify-center shadow-md">
-                    {formatNumber(timeLeft.hours)}
-                  </span>
-                  <span className="text-[10px] font-bold text-white/80 mt-1 uppercase">Hours</span>
-                </div>
-                <span className="text-2xl font-black text-white/80 -mt-4">:</span>
-                <div className="flex flex-col items-center">
-                  <span className="w-12 h-12 rounded-xl bg-white text-brand text-xl font-black flex items-center justify-center shadow-md">
-                    {formatNumber(timeLeft.minutes)}
-                  </span>
-                  <span className="text-[10px] font-bold text-white/80 mt-1 uppercase">Mins</span>
-                </div>
-                <span className="text-2xl font-black text-white/80 -mt-4">:</span>
-                <div className="flex flex-col items-center">
-                  <span className="w-12 h-12 rounded-xl bg-white text-brand text-xl font-black flex items-center justify-center shadow-md">
-                    {formatNumber(timeLeft.seconds)}
-                  </span>
-                  <span className="text-[10px] font-bold text-white/80 mt-1 uppercase">Secs</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="absolute -right-8 -bottom-8 w-60 h-60 bg-white/10 rounded-full blur-2xl pointer-events-none" />
-        </div>
-
-        {/* Value Highlights Strip (Brand Colors) */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-8">
-          <div className="bg-white rounded-xl p-3.5 border border-border-light flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg bg-brand-light text-brand flex items-center justify-center shrink-0">
-              <Zap className="w-4 h-4 fill-current" />
-            </div>
-            <div>
-              <h4 className="text-xs font-bold text-text-main">Instant Price Drops</h4>
-              <p className="text-[11px] text-text-muted">Direct manufacturer clearance discounts</p>
-            </div>
+        {/* Compact Breadcrumb Bar */}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5 py-1.5 mb-2.5 border-b border-border-light">
+          <div className="flex flex-wrap items-center gap-2">
+            <nav
+              aria-label="Breadcrumb"
+              className="flex items-center gap-1.5 text-xs text-text-muted"
+            >
+              <Link href="/" className="hover:text-brand transition-colors">
+                Home
+              </Link>
+              <ChevronRight className="w-3.5 h-3.5" />
+              <span className="text-text-main font-semibold">Mega Deals</span>
+            </nav>
+            <span className="text-border-light hidden sm:inline">|</span>
+            <span className="inline-flex items-center gap-1.5 text-xs font-semibold px-2 py-0.5 rounded-full bg-brand-light text-brand">
+              <Flame className="w-3.5 h-3.5 fill-current" />
+              <span>{megaDeals.length} Flash Deals Live</span>
+            </span>
           </div>
 
-          <div className="bg-white rounded-xl p-3.5 border border-border-light flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg bg-brand-light text-brand flex items-center justify-center shrink-0">
-              <Tag className="w-4 h-4" />
-            </div>
-            <div>
-              <h4 className="text-xs font-bold text-text-main">Stackable Coupons</h4>
-              <p className="text-[11px] text-text-muted">Use checkout promo codes for extra savings</p>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-xl p-3.5 border border-border-light flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg bg-brand-light text-brand flex items-center justify-center shrink-0">
-              <Flame className="w-4 h-4 fill-current" />
-            </div>
-            <div>
-              <h4 className="text-xs font-bold text-text-main">Limited Stock Allocation</h4>
-              <p className="text-[11px] text-text-muted">Reserve before units sell out completely</p>
-            </div>
+          {/* Compact Countdown Bar */}
+          <div className="flex items-center gap-2 text-xs font-mono font-bold bg-brand text-white px-3 py-1 rounded-full shadow-xs">
+            <Timer className="w-3.5 h-3.5 text-white animate-pulse" />
+            <span className="text-[11px] font-sans font-medium text-white/90">Deals Expire:</span>
+            <span className="bg-white text-brand px-1.5 py-0.2 rounded font-black text-xs">{formatNumber(timeLeft.hours)}h</span>
+            <span>:</span>
+            <span className="bg-white text-brand px-1.5 py-0.2 rounded font-black text-xs">{formatNumber(timeLeft.minutes)}m</span>
+            <span>:</span>
+            <span className="bg-white text-brand px-1.5 py-0.2 rounded font-black text-xs">{formatNumber(timeLeft.seconds)}s</span>
           </div>
         </div>
 

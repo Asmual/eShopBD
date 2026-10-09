@@ -94,60 +94,50 @@ export default function CategoriesPage() {
   }));
 
   return (
-    <div className="w-full bg-brand-surface/40 min-h-screen py-6 sm:py-10">
+    <div className="w-full bg-brand-surface/40 min-h-screen pt-2 sm:pt-3 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Breadcrumb Navigation */}
-        <nav
-          aria-label="Breadcrumb"
-          className="flex items-center gap-2 text-xs text-text-muted mb-4 sm:mb-6"
-        >
-          <Link href="/" className="hover:text-brand transition-colors">
-            Home
-          </Link>
-          <ChevronRight className="w-3.5 h-3.5" />
-          <span className="text-text-main font-semibold">Categories</span>
-        </nav>
-
-        {/* Page Header Banner */}
-        <div className="bg-gradient-to-r from-brand to-brand-hover rounded-2xl p-6 sm:p-10 text-white mb-8 sm:mb-12 shadow-sm relative overflow-hidden">
-          <div className="relative z-10 max-w-2xl">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 text-white text-xs font-bold uppercase tracking-wider mb-3 backdrop-blur-xs">
-              <Layers className="w-3.5 h-3.5" />
-              <span>Explore Department Showcase</span>
-            </div>
-            <h1 className="text-2xl sm:text-4xl font-black tracking-tight">
-              All Categories & Departments
-            </h1>
-            <p className="mt-2 text-xs sm:text-sm text-white/90 leading-relaxed">
-              Explore thousands of verified products across fashion, electronics, toys, and lifestyle. Discover deals curated for your every need.
-            </p>
+        {/* Compact Breadcrumbs & Header Strip */}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5 py-1.5 mb-3 border-b border-border-light">
+          <div className="flex flex-wrap items-center gap-2">
+            <nav
+              aria-label="Breadcrumb"
+              className="flex items-center gap-1.5 text-xs text-text-muted"
+            >
+              <Link href="/" className="hover:text-brand transition-colors">
+                Home
+              </Link>
+              <ChevronRight className="w-3.5 h-3.5" />
+              <span className="text-text-main font-semibold">Categories</span>
+            </nav>
+            <span className="text-border-light hidden sm:inline">|</span>
+            <span className="inline-flex items-center gap-1.5 text-xs font-semibold px-2 py-0.5 rounded-full bg-brand-light text-brand">
+              <Layers className="w-3 h-3" />
+              <span>{CATEGORIES_METADATA.length} Primary Departments</span>
+            </span>
           </div>
-          <div className="absolute -right-10 -bottom-10 w-64 h-64 bg-white/5 rounded-full blur-2xl pointer-events-none" />
+          <p className="text-[11px] sm:text-xs text-text-muted hidden md:block">
+            Explore verified products across all departments
+          </p>
         </div>
 
         {/* Category Cards Showcase */}
-        <div className="mb-10 sm:mb-14">
-          <div className="flex items-center justify-between mb-5">
-            <div>
-              <h2 className="text-lg sm:text-xl font-black text-text-main">
-                Featured Categories
-              </h2>
-              <p className="text-xs text-text-muted">
-                Select a department to quickly view its product catalog
-              </p>
-            </div>
+        <div className="mb-4 sm:mb-6">
+          <div className="flex items-center justify-between mb-2.5">
+            <h2 className="text-sm font-bold text-text-main">
+              Featured Departments
+            </h2>
             {selectedCategory !== "all" && (
               <button
                 type="button"
                 onClick={() => setSelectedCategory("all")}
                 className="text-xs font-bold text-brand hover:underline cursor-pointer"
               >
-                View All Categories
+                Clear Filter (View All)
               </button>
             )}
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-5">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 sm:gap-3">
             {CATEGORIES_METADATA.map((cat) => {
               const isSelected = selectedCategory === cat.id;
               return (
@@ -156,13 +146,13 @@ export default function CategoriesPage() {
                   onClick={() =>
                     setSelectedCategory(isSelected ? "all" : cat.id)
                   }
-                  className={`group relative rounded-2xl p-4 bg-white border transition-all duration-300 cursor-pointer overflow-hidden ${
+                  className={`group relative rounded-xl p-2.5 sm:p-3 bg-white border transition-all duration-200 cursor-pointer overflow-hidden ${
                     isSelected
-                      ? "border-brand ring-2 ring-brand/20 shadow-md bg-brand-surface"
-                      : "border-border-light hover:border-brand/40 hover:shadow-md"
+                      ? "border-brand ring-2 ring-brand/20 shadow-xs bg-brand-surface"
+                      : "border-border-light hover:border-brand/40 hover:shadow-xs"
                   }`}
                 >
-                  <div className="relative w-full aspect-square rounded-xl overflow-hidden bg-gray-50 mb-3">
+                  <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-gray-50 mb-2">
                     <Image
                       src={cat.image}
                       alt={cat.name}
@@ -174,7 +164,7 @@ export default function CategoriesPage() {
                   <h3 className="text-xs sm:text-sm font-bold text-text-main group-hover:text-brand transition-colors line-clamp-1">
                     {cat.name}
                   </h3>
-                  <span className="text-[11px] font-semibold text-text-muted block mt-0.5">
+                  <span className="text-[10px] sm:text-[11px] font-semibold text-text-muted block mt-0.5">
                     {cat.itemCount}
                   </span>
                 </div>

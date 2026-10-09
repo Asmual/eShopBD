@@ -77,7 +77,7 @@ export default function ProductCard({
         {/* Top-Left Status / Category Badge (e.g. HOT, NEW, BEST SELLER) */}
         {product.badge && product.discountPercent === 0 && (
           <div className="absolute top-2 left-2 z-10">
-            <span className="px-1.5 py-0.5 rounded-md bg-amber-500 text-white text-[9px] font-bold uppercase tracking-wider shadow-2xs">
+            <span className="px-1.5 py-0.5 rounded-md bg-brand text-white text-[9px] font-bold uppercase tracking-wider shadow-2xs">
               {product.badge}
             </span>
           </div>
@@ -142,11 +142,11 @@ export default function ProductCard({
             <div className="mt-1.5">
               <div className="flex items-center justify-between text-[9px] font-semibold text-text-muted mb-0.5">
                 <span>Sold: {product.soldCount}</span>
-                <span className="text-orange-600 font-bold">{product.claimedPercent}%</span>
+                <span className="text-brand font-bold">{product.claimedPercent}%</span>
               </div>
               <div className="w-full h-1 bg-gray-100 rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-gradient-to-r from-orange-500 to-amber-400 rounded-full"
+                  className="h-full bg-brand rounded-full"
                   style={{ width: `${product.claimedPercent}%` }}
                 />
               </div>
@@ -199,7 +199,7 @@ export default function ProductCard({
             aria-label={`Buy ${product.name} now`}
             className="flex items-center justify-center gap-1 py-1.5 px-1.5 rounded-lg bg-text-main hover:bg-black text-white text-[10px] sm:text-[11px] font-bold transition-all active:scale-98 cursor-pointer shadow-2xs"
           >
-            <Zap className="w-3 h-3 text-amber-400 fill-amber-400 shrink-0" />
+            <Zap className="w-3 h-3 text-emerald-400 fill-emerald-400 shrink-0" />
             <span className="truncate">Buy Now</span>
           </button>
         </div>
