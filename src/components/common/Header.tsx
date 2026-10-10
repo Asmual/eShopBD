@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import TopNavbar from "./TopNavbar";
 import BottomNavbar from "./BottomNavbar";
 import Logo from "./Logo";
@@ -22,6 +23,14 @@ import {
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  const isActiveRoute = (href: string) => {
+    if (href === "/") {
+      return pathname === "/";
+    }
+    return pathname === href || pathname.startsWith(`${href}/`);
+  };
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen((prev) => !prev);
@@ -75,7 +84,11 @@ export default function Header() {
               <Link
                 href="/"
                 onClick={closeMobileMenu}
-                className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-text-main hover:bg-brand-light hover:text-brand transition-colors"
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
+                  isActiveRoute("/")
+                    ? "bg-brand-light text-brand font-semibold"
+                    : "text-text-main hover:bg-brand-light hover:text-brand font-medium"
+                }`}
               >
                 <Home className="w-4 h-4 text-brand" />
                 <span>Home</span>
@@ -84,7 +97,11 @@ export default function Header() {
               <Link
                 href="/categories"
                 onClick={closeMobileMenu}
-                className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-text-main hover:bg-brand-light hover:text-brand transition-colors"
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
+                  isActiveRoute("/categories")
+                    ? "bg-brand-light text-brand font-semibold"
+                    : "text-text-main hover:bg-brand-light hover:text-brand font-medium"
+                }`}
               >
                 <Layers className="w-4 h-4 text-brand" />
                 <span>Categories</span>
@@ -93,7 +110,11 @@ export default function Header() {
               <Link
                 href="/new-arrivals"
                 onClick={closeMobileMenu}
-                className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-text-main hover:bg-brand-light hover:text-brand transition-colors"
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
+                  isActiveRoute("/new-arrivals")
+                    ? "bg-brand-light text-brand font-semibold"
+                    : "text-text-main hover:bg-brand-light hover:text-brand font-medium"
+                }`}
               >
                 <Sparkles className="w-4 h-4 text-brand" />
                 <span>New Arrival</span>
@@ -102,7 +123,11 @@ export default function Header() {
               <Link
                 href="/best-sellers"
                 onClick={closeMobileMenu}
-                className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-text-main hover:bg-brand-light hover:text-brand transition-colors"
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
+                  isActiveRoute("/best-sellers")
+                    ? "bg-brand-light text-brand font-semibold"
+                    : "text-text-main hover:bg-brand-light hover:text-brand font-medium"
+                }`}
               >
                 <Award className="w-4 h-4 text-brand" />
                 <span>Best Sellers</span>
@@ -111,7 +136,11 @@ export default function Header() {
               <Link
                 href="/mega-deals"
                 onClick={closeMobileMenu}
-                className="flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium text-text-main hover:bg-brand-light hover:text-brand transition-colors"
+                className={`flex items-center justify-between px-3 py-2.5 rounded-lg text-sm transition-colors ${
+                  isActiveRoute("/mega-deals")
+                    ? "bg-brand-light text-brand font-semibold"
+                    : "text-text-main hover:bg-brand-light hover:text-brand font-medium"
+                }`}
               >
                 <div className="flex items-center gap-3">
                   <Flame className="w-4 h-4 text-orange-500" />
@@ -125,7 +154,11 @@ export default function Header() {
               <Link
                 href="/offers"
                 onClick={closeMobileMenu}
-                className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-text-main hover:bg-brand-light hover:text-brand transition-colors"
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
+                  isActiveRoute("/offers")
+                    ? "bg-brand-light text-brand font-semibold"
+                    : "text-text-main hover:bg-brand-light hover:text-brand font-medium"
+                }`}
               >
                 <Tag className="w-4 h-4 text-brand" />
                 <span>Offers</span>
@@ -134,7 +167,11 @@ export default function Header() {
               <Link
                 href="/become-seller"
                 onClick={closeMobileMenu}
-                className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-text-main hover:bg-brand-light hover:text-brand transition-colors"
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
+                  isActiveRoute("/become-seller")
+                    ? "bg-brand-light text-brand font-semibold"
+                    : "text-text-main hover:bg-brand-light hover:text-brand font-medium"
+                }`}
               >
                 <Store className="w-4 h-4 text-brand" />
                 <span>Become a Seller</span>
@@ -148,7 +185,11 @@ export default function Header() {
                 <Link
                   href="/track-order"
                   onClick={closeMobileMenu}
-                  className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-text-main hover:bg-brand-light hover:text-brand transition-colors"
+                  className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
+                    isActiveRoute("/track-order")
+                      ? "bg-brand-light text-brand font-semibold"
+                      : "text-text-main hover:bg-brand-light hover:text-brand font-medium"
+                  }`}
                 >
                   <Truck className="w-4 h-4 text-text-muted" />
                   <span>Track Order</span>
@@ -157,7 +198,11 @@ export default function Header() {
                 <Link
                   href="/customer/orders"
                   onClick={closeMobileMenu}
-                  className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-text-main hover:bg-brand-light hover:text-brand transition-colors"
+                  className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
+                    isActiveRoute("/customer/orders")
+                      ? "bg-brand-light text-brand font-semibold"
+                      : "text-text-main hover:bg-brand-light hover:text-brand font-medium"
+                  }`}
                 >
                   <Heart className="w-4 h-4 text-text-muted" />
                   <span>Wishlist</span>
@@ -166,7 +211,11 @@ export default function Header() {
                 <Link
                   href="/cart"
                   onClick={closeMobileMenu}
-                  className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-text-main hover:bg-brand-light hover:text-brand transition-colors"
+                  className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
+                    isActiveRoute("/cart")
+                      ? "bg-brand-light text-brand font-semibold"
+                      : "text-text-main hover:bg-brand-light hover:text-brand font-medium"
+                  }`}
                 >
                   <ShoppingCart className="w-4 h-4 text-text-muted" />
                   <span>Shopping Cart</span>
@@ -175,7 +224,11 @@ export default function Header() {
                 <Link
                   href="/login"
                   onClick={closeMobileMenu}
-                  className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-text-main hover:bg-brand-light hover:text-brand transition-colors"
+                  className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
+                    isActiveRoute("/login")
+                      ? "bg-brand-light text-brand font-semibold"
+                      : "text-text-main hover:bg-brand-light hover:text-brand font-medium"
+                  }`}
                 >
                   <User className="w-4 h-4 text-text-muted" />
                   <span>Login / Sign Up</span>
