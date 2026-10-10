@@ -41,7 +41,7 @@ const CATEGORIES_METADATA = [
   {
     id: "electronics",
     name: "Electronics & Gadgets",
-    image: "/images/products/electronics/electronics-8.jpg",
+    image: "/images/categories/category-electronics.jpg",
     itemCount: "10+ Verified Items",
     description: "Wireless audio, power banks, fast chargers & home speakers.",
   },
