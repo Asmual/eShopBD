@@ -1,13 +1,17 @@
 "use client";
 
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   Menu,
+  X,
   Store,
   Flame,
+  ChevronDown,
+  ChevronRight,
 } from "lucide-react";
+import { CATEGORIES } from "@/features/products/components/CategorySidebar";
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
@@ -24,6 +28,33 @@ const NAV_LINKS = [
 
 export default function BottomNavbar() {
   const pathname = usePathname();
+  const isHomePage = pathname === "/";
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdown on route change
+  useEffect(() => {
+    setIsDropdownOpen(false);
+  }, [pathname]);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    if (!isDropdownOpen) return;
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isDropdownOpen]);
 
   const isActiveRoute = (href: string) => {
     if (href === "/") {
@@ -36,15 +67,71 @@ export default function BottomNavbar() {
     <div className="hidden md:block w-full bg-brand text-white relative z-30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-10 sm:h-10.5">
-          {/* Left: All Categories Permanent Header (Fixed on Desktop) */}
-          <div className="relative shrink-0">
-            <div
-              className="h-10 sm:h-10.5 w-64 px-4 bg-brand-hover flex items-center gap-2.5 text-xs sm:text-[13px] font-bold tracking-wide uppercase select-none"
-            >
-              <Menu className="w-4 h-4 shrink-0" />
-              <span>All Categories</span>
+          {/* Left: All Categories Section */}
+          {isHomePage ? (
+            /* Fixed permanent header on Homepage (matches CategorySidebar perfectly) */
+            <div className="relative shrink-0">
+              <div className="h-10 sm:h-10.5 w-64 px-4 bg-brand-hover flex items-center gap-2.5 text-xs sm:text-[13px] font-bold tracking-wide uppercase select-none">
+                <Menu className="w-4 h-4 shrink-0" />
+                <span>All Categories</span>
+              </div>
             </div>
-          </div>
+          ) : (
+            /* Interactive toggle button with floating overlay on all subpages */
+            <div ref={dropdownRef} className="relative shrink-0">
+              <button
+                type="button"
+                onClick={() => setIsDropdownOpen((prev) => !prev)}
+                aria-expanded={isDropdownOpen}
+                aria-label="Toggle All Categories Menu"
+                className="h-10 sm:h-10.5 w-64 px-4 bg-brand-hover hover:bg-brand-hover/90 flex items-center justify-between text-xs sm:text-[13px] font-bold tracking-wide uppercase cursor-pointer transition-colors focus:outline-hidden"
+              >
+                <div className="flex items-center gap-2.5">
+                  {isDropdownOpen ? (
+                    <X className="w-4 h-4 shrink-0 transition-transform duration-200" />
+                  ) : (
+                    <Menu className="w-4 h-4 shrink-0 transition-transform duration-200" />
+                  )}
+                  <span>All Categories</span>
+                </div>
+                <ChevronDown
+                  className={`w-4 h-4 shrink-0 transition-transform duration-200 ${
+                    isDropdownOpen ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+
+              {/* Floating Dropdown Overlay */}
+              {isDropdownOpen && (
+                <div className="absolute top-full left-0 z-50 w-64 bg-white text-text-main shadow-2xl rounded-b-xl border-x border-b border-border-light overflow-hidden animate-in fade-in-0 duration-150">
+                  <ul className="divide-y divide-border-light/50 max-h-[calc(100vh-160px)] overflow-y-auto">
+                    {CATEGORIES.map((category) => {
+                      const Icon = category.icon;
+                      return (
+                        <li key={category.id}>
+                          <Link
+                            href={
+                              category.slug === "electronics"
+                                ? "/electronics"
+                                : `/products?category=${category.slug}`
+                            }
+                            onClick={() => setIsDropdownOpen(false)}
+                            className="flex items-center justify-between px-4 py-2.5 text-xs sm:text-[13px] font-medium text-text-main hover:bg-brand-light hover:text-brand transition-colors group"
+                          >
+                            <div className="flex items-center gap-2.5">
+                              <Icon className="w-4 h-4 text-text-muted group-hover:text-brand transition-colors" />
+                              <span>{category.name}</span>
+                            </div>
+                            <ChevronRight className="w-3.5 h-3.5 text-text-muted group-hover:text-brand group-hover:translate-x-0.5 transition-transform" />
+                          </Link>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              )}
+            </div>
+          )}
 
           {/* Center: Main Navigation Links */}
           <nav

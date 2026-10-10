@@ -18,7 +18,7 @@ import {
 } from "lucide-react";
 import { CategoryItem } from "../types";
 
-const CATEGORIES: CategoryItem[] = [
+export const CATEGORIES: CategoryItem[] = [
   { id: "1", name: "Baby & Kids", slug: "baby-kids", icon: Baby },
   { id: "2", name: "Beauty", slug: "beauty", icon: Sparkles },
   { id: "3", name: "Books", slug: "books", icon: BookOpen },
