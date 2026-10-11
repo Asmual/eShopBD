@@ -78,7 +78,14 @@ export default function TopNavbar({
               )}
             </button>
 
-            {/* Track Order (Desktop only) */}
+            {/* Track Order (Mobile Icon & Desktop Link) */}
+            <Link
+              href="/track-order"
+              className="flex lg:hidden items-center text-text-main hover:text-brand transition-colors p-1"
+              aria-label="Track Order"
+            >
+              <Truck className="w-4.5 h-4.5 text-text-main hover:text-brand transition-colors" />
+            </Link>
             <Link
               href="/track-order"
               className="hidden lg:flex items-center gap-1.5 text-text-main hover:text-brand transition-colors text-xs sm:text-sm font-medium"

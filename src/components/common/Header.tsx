@@ -15,9 +15,6 @@ import {
   Flame,
   Tag,
   Store,
-  Truck,
-  Heart,
-  ShoppingCart,
   User,
 } from "lucide-react";
 
@@ -178,49 +175,6 @@ export default function Header() {
               </Link>
 
               <div className="border-t border-border-light my-3 pt-3">
-                <div className="text-xs font-semibold uppercase tracking-wider text-text-muted px-3 py-2">
-                  Account & Orders
-                </div>
-
-                <Link
-                  href="/track-order"
-                  onClick={closeMobileMenu}
-                  className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
-                    isActiveRoute("/track-order")
-                      ? "bg-brand-light text-brand font-semibold"
-                      : "text-text-main hover:bg-brand-light hover:text-brand font-medium"
-                  }`}
-                >
-                  <Truck className="w-4 h-4 text-text-muted" />
-                  <span>Track Order</span>
-                </Link>
-
-                <Link
-                  href="/customer/orders"
-                  onClick={closeMobileMenu}
-                  className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
-                    isActiveRoute("/customer/orders")
-                      ? "bg-brand-light text-brand font-semibold"
-                      : "text-text-main hover:bg-brand-light hover:text-brand font-medium"
-                  }`}
-                >
-                  <Heart className="w-4 h-4 text-text-muted" />
-                  <span>Wishlist</span>
-                </Link>
-
-                <Link
-                  href="/cart"
-                  onClick={closeMobileMenu}
-                  className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
-                    isActiveRoute("/cart")
-                      ? "bg-brand-light text-brand font-semibold"
-                      : "text-text-main hover:bg-brand-light hover:text-brand font-medium"
-                  }`}
-                >
-                  <ShoppingCart className="w-4 h-4 text-text-muted" />
-                  <span>Shopping Cart</span>
-                </Link>
-
                 <Link
                   href="/login"
                   onClick={closeMobileMenu}
@@ -230,7 +184,7 @@ export default function Header() {
                       : "text-text-main hover:bg-brand-light hover:text-brand font-medium"
                   }`}
                 >
-                  <User className="w-4 h-4 text-text-muted" />
+                  <User className="w-4 h-4 text-brand" />
                   <span>Login / Sign Up</span>
                 </Link>
               </div>
