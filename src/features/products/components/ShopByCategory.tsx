@@ -37,10 +37,10 @@ const CATEGORIES_SHOWCASE: CategoryShowcaseItem[] = [
   },
   {
     id: "cat-toys",
-    name: "Toys & Games",
-    slug: "toys-games",
-    image: "/images/categories/category-Toys.jpg",
-    href: "/products?category=toys-games",
+    name: "Toys & Kids",
+    slug: "toys-kids",
+    image: "/images/all products/toys/Toys- (1).jpg",
+    href: "/toys",
   },
   {
     id: "cat-electronics",

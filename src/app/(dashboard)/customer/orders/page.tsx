@@ -48,7 +48,7 @@ const DEMO_CUSTOMER_ORDERS: CustomerOrder[] = [
       {
         id: "i-1",
         name: "Sony SRS-XB13 Extra Bass Wireless Compact Speaker",
-        image: "/images/products/electronics/electronics-8.jpg",
+        image: "/images/all products/electronics/electronics-8.jpg",
         quantity: 1,
         price: 4950,
         variant: "Forest Green",
@@ -75,7 +75,7 @@ const DEMO_CUSTOMER_ORDERS: CustomerOrder[] = [
       {
         id: "i-3",
         name: "30,000mAh Ultra-Fast PD 65W Power Bank with Digital Display",
-        image: "/images/products/electronics/electronics-2.jpg",
+        image: "/images/all products/electronics/electronics-2.jpg",
         quantity: 1,
         price: 2850,
         variant: "Matte Black",
@@ -94,7 +94,7 @@ const DEMO_CUSTOMER_ORDERS: CustomerOrder[] = [
       {
         id: "i-4",
         name: "JBL Tune 510BT Pure Bass Wireless Bluetooth Headphones",
-        image: "/images/products/electronics/electronics-9.jpg",
+        image: "/images/all products/electronics/electronics-9.jpg",
         quantity: 1,
         price: 4200,
         variant: "Midnight Black",

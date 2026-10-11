@@ -113,6 +113,8 @@ export default function BottomNavbar() {
                             href={
                               category.slug === "electronics"
                                 ? "/electronics"
+                                : category.slug === "toys-kids"
+                                ? "/toys"
                                 : `/products?category=${category.slug}`
                             }
                             onClick={() => setIsDropdownOpen(false)}

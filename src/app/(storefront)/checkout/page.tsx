@@ -23,7 +23,7 @@ const CHECKOUT_ITEMS = [
     name: "Sony SRS-XB13 Extra Bass Wireless Compact Speaker",
     price: 4950,
     quantity: 1,
-    image: "/images/products/electronics/electronics-8.jpg",
+    image: "/images/all products/electronics/electronics-8.jpg",
     variant: "Forest Green",
   },
   {

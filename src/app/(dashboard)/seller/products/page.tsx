@@ -38,7 +38,7 @@ const DEMO_SELLER_PRODUCTS: SellerProduct[] = [
     price: 4950,
     stock: 24,
     sold: 142,
-    image: "/images/products/electronics/electronics-8.jpg",
+    image: "/images/all products/electronics/electronics-8.jpg",
     status: "active",
   },
   {
@@ -49,7 +49,7 @@ const DEMO_SELLER_PRODUCTS: SellerProduct[] = [
     price: 2850,
     stock: 5,
     sold: 380,
-    image: "/images/products/electronics/electronics-2.jpg",
+    image: "/images/all products/electronics/electronics-2.jpg",
     status: "low_stock",
   },
   {
@@ -60,7 +60,7 @@ const DEMO_SELLER_PRODUCTS: SellerProduct[] = [
     price: 4200,
     stock: 18,
     sold: 215,
-    image: "/images/products/electronics/electronics-9.jpg",
+    image: "/images/all products/electronics/electronics-9.jpg",
     status: "active",
   },
   {
@@ -71,7 +71,7 @@ const DEMO_SELLER_PRODUCTS: SellerProduct[] = [
     price: 1150,
     stock: 0,
     sold: 510,
-    image: "/images/products/electronics/electronics-4.jpg",
+    image: "/images/all products/electronics/electronics-4.jpg",
     status: "out_of_stock",
   },
   {
@@ -82,7 +82,7 @@ const DEMO_SELLER_PRODUCTS: SellerProduct[] = [
     price: 1650,
     stock: 35,
     sold: 430,
-    image: "/images/products/electronics/electronics-10.jpg",
+    image: "/images/all products/electronics/electronics-10.jpg",
     status: "active",
   },
 ];

@@ -18,7 +18,7 @@ import {
 import { CategoryItem } from "../types";
 
 export const CATEGORIES: CategoryItem[] = [
-  { id: "1", name: "Baby & Kids", slug: "baby-kids", icon: Baby },
+  { id: "1", name: "Toys & Kids", slug: "toys-kids", icon: Baby },
   { id: "3", name: "Books", slug: "books", icon: BookOpen },
   { id: "4", name: "Electronics", slug: "electronics", icon: Tv },
   { id: "5", name: "Fashion", slug: "fashion", icon: Shirt },
@@ -42,7 +42,13 @@ export default function CategorySidebar() {
           return (
             <li key={category.id}>
               <Link
-                href={category.slug === "electronics" ? "/electronics" : `/products?category=${category.slug}`}
+                href={
+                  category.slug === "electronics"
+                    ? "/electronics"
+                    : category.slug === "toys-kids"
+                    ? "/toys"
+                    : `/products?category=${category.slug}`
+                }
                 className="flex items-center justify-between px-4 py-2 text-xs sm:text-[13px] font-medium text-text-main hover:bg-brand-light hover:text-brand transition-colors group"
               >
                 <div className="flex items-center gap-2.5">

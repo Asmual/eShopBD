@@ -32,11 +32,11 @@ const CATEGORIES_METADATA = [
     description: "Gentle organic clothing, baby care essentials, shoes & accessories.",
   },
   {
-    id: "toys-games",
-    name: "Toys & Games",
-    image: "/images/categories/category-Toys.jpg",
-    itemCount: "210+ Items",
-    description: "Interactive STEM robots, building blocks, drones & board games.",
+    id: "toys-kids",
+    name: "Toys & Kids",
+    image: "/images/all products/toys/Toys- (1).jpg",
+    itemCount: "21+ Verified Items",
+    description: "Interactive STEM toys, educational flashcards, RC cars, dolls & baby playsets.",
   },
   {
     id: "electronics",
