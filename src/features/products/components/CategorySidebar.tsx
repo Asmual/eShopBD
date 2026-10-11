@@ -4,7 +4,6 @@ import React from "react";
 import Link from "next/link";
 import {
   Baby,
-  Sparkles,
   BookOpen,
   Tv,
   Shirt,
@@ -20,7 +19,6 @@ import { CategoryItem } from "../types";
 
 export const CATEGORIES: CategoryItem[] = [
   { id: "1", name: "Baby & Kids", slug: "baby-kids", icon: Baby },
-  { id: "2", name: "Beauty", slug: "beauty", icon: Sparkles },
   { id: "3", name: "Books", slug: "books", icon: BookOpen },
   { id: "4", name: "Electronics", slug: "electronics", icon: Tv },
   { id: "5", name: "Fashion", slug: "fashion", icon: Shirt },

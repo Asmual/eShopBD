@@ -30,7 +30,6 @@ const STORE_CATEGORIES = [
   "Fashion & Apparel",
   "Consumer Electronics",
   "Home & Kitchen",
-  "Beauty & Personal Care",
   "Baby & Kids",
   "Daily Grocery",
   "Health & Fitness",
