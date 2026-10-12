@@ -56,10 +56,24 @@ export default function LoginForm({ onSwitchToRegister }: LoginFormProps) {
     }
   };
 
-  const handleSocialLogin = (provider: string) => {
-    toast(`Connecting with ${provider}...`, {
-      icon: "🔐",
-    });
+  const handleSocialLogin = async (provider: string) => {
+    if (provider.toLowerCase() === "google") {
+      setIsLoading(true);
+      try {
+        await signIn.social({
+          provider: "google",
+          callbackURL: "/",
+        });
+      } catch (err: unknown) {
+        const msg = err instanceof Error ? err.message : "Failed to connect with Google";
+        toast.error(msg);
+        setIsLoading(false);
+      }
+    } else {
+      toast(`${provider} login will be available soon!`, {
+        icon: "ℹ️",
+      });
+    }
   };
 
   return (

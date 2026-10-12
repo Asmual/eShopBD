@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { User, Mail, Lock, Eye, EyeOff, ArrowRight } from "lucide-react";
 import toast from "react-hot-toast";
-import { signUp } from "@/lib/auth-client";
+import { signUp, signIn } from "@/lib/auth-client";
 import { registerSchema } from "../schemas";
 import { RegisterFormData } from "../types";
 
@@ -62,10 +62,24 @@ export default function RegisterForm({ onSwitchToLogin }: RegisterFormProps) {
     }
   };
 
-  const handleSocialRegister = (provider: string) => {
-    toast(`Connecting with ${provider}...`, {
-      icon: "🔐",
-    });
+  const handleSocialRegister = async (provider: string) => {
+    if (provider.toLowerCase() === "google") {
+      setIsLoading(true);
+      try {
+        await signIn.social({
+          provider: "google",
+          callbackURL: "/",
+        });
+      } catch (err: unknown) {
+        const msg = err instanceof Error ? err.message : "Failed to connect with Google";
+        toast.error(msg);
+        setIsLoading(false);
+      }
+    } else {
+      toast(`${provider} registration will be available soon!`, {
+        icon: "ℹ️",
+      });
+    }
   };
 
   return (
