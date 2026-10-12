@@ -10,8 +10,10 @@ import {
   User,
   Menu,
   X,
+  LogOut,
 } from "lucide-react";
 import Logo from "./Logo";
+import { useSession, signOut } from "@/lib/auth-client";
 
 interface TopNavbarProps {
   onToggleMobileMenu?: () => void;
@@ -24,6 +26,8 @@ export default function TopNavbar({
 }: TopNavbarProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
+
+  const { data: session } = useSession();
 
   const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -118,14 +122,39 @@ export default function TopNavbar({
               </span>
             </Link>
 
-            {/* Login / Sign Up */}
-            <Link
-              href="/login"
-              className="hidden sm:flex items-center gap-1.5 text-xs sm:text-sm font-medium text-text-main hover:text-brand transition-colors pl-2.5 sm:pl-3 border-l border-border-light"
-            >
-              <User className="w-4 h-4 text-text-muted" />
-              <span>Login / Sign Up</span>
-            </Link>
+            {/* User Session / Auth */}
+            {session?.user ? (
+              <div className="hidden sm:flex items-center gap-1.5 pl-2.5 sm:pl-3 border-l border-border-light">
+                <Link
+                  href="/customer/orders"
+                  className="flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-text-main hover:text-brand transition-colors"
+                >
+                  <div className="w-5.5 h-5.5 rounded-full bg-brand-light text-brand flex items-center justify-center text-[11px] font-bold uppercase">
+                    {session.user.name?.charAt(0) || "U"}
+                  </div>
+                  <span className="max-w-[85px] truncate">
+                    {session.user.name?.split(" ")[0] || "Account"}
+                  </span>
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => signOut()}
+                  title="Sign Out"
+                  aria-label="Sign Out"
+                  className="p-1 text-text-muted hover:text-red-500 transition-colors cursor-pointer"
+                >
+                  <LogOut className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            ) : (
+              <Link
+                href="/login"
+                className="hidden sm:flex items-center gap-1.5 text-xs sm:text-sm font-medium text-text-main hover:text-brand transition-colors pl-2.5 sm:pl-3 border-l border-border-light"
+              >
+                <User className="w-4 h-4 text-text-muted" />
+                <span>Login / Sign Up</span>
+              </Link>
+            )}
 
             {/* Mobile Menu Toggle Button */}
             <button

@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import { Mail, Lock, Eye, EyeOff, ArrowRight } from "lucide-react";
 import toast from "react-hot-toast";
 import { signIn } from "@/lib/auth-client";
@@ -14,6 +15,7 @@ interface LoginFormProps {
 }
 
 export default function LoginForm({ onSwitchToRegister }: LoginFormProps) {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -38,16 +40,17 @@ export default function LoginForm({ onSwitchToRegister }: LoginFormProps) {
         password: data.password,
       });
 
-      if (res.error) {
+      if (res?.error) {
         toast.error(res.error.message || "Invalid email or password");
-        setIsLoading(false);
         return;
       }
 
-      toast.success(`Welcome back! Signed in successfully.`);
-    } catch {
-      // Mock / fallback success for offline testing
-      toast.success(`Welcome back, ${data.email.split("@")[0]}! Signed in successfully.`);
+      toast.success("Welcome back! Signed in successfully.");
+      router.push("/");
+      router.refresh();
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : "Failed to sign in. Please try again.";
+      toast.error(msg);
     } finally {
       setIsLoading(false);
     }

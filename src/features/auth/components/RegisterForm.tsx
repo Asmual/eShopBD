@@ -42,18 +42,21 @@ export default function RegisterForm({ onSwitchToLogin }: RegisterFormProps) {
         name: data.fullName,
       });
 
-      if (res.error) {
+      if (res?.error) {
         toast.error(res.error.message || "Failed to create account");
-        setIsLoading(false);
         return;
       }
 
-      toast.success(`Account created successfully for ${data.fullName}! Welcome to eShopBD.`);
+      toast.success(
+        `Account created successfully for ${data.fullName}! Please sign in.`
+      );
       onSwitchToLogin();
-    } catch {
-      // Mock / fallback success for offline testing
-      toast.success(`Account created successfully for ${data.fullName}! Welcome to eShopBD.`);
-      onSwitchToLogin();
+    } catch (err: unknown) {
+      const msg =
+        err instanceof Error
+          ? err.message
+          : "Registration failed. Please try again.";
+      toast.error(msg);
     } finally {
       setIsLoading(false);
     }
