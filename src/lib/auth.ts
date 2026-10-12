@@ -38,4 +38,21 @@ export const auth = betterAuth({
       },
     },
   },
+  databaseHooks: {
+    user: {
+      create: {
+        after: async (user) => {
+          if (user?.email) {
+            const { sendWelcomeEmail } = await import("./email");
+            sendWelcomeEmail({
+              to: user.email,
+              name: user.name,
+            }).catch((err) => {
+              console.error("[Welcome Email Hook Error]:", err);
+            });
+          }
+        },
+      },
+    },
+  },
 });
