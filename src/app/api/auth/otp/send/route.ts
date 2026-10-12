@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
 
     if (!email || typeof email !== "string" || !email.includes("@")) {
       return NextResponse.json(
-        { error: "অনুগ্রহ করে একটি সঠিক ইমেইল এড্রেস প্রদান করুন।" },
+        { error: "Please enter a valid email address." },
         { status: 400 }
       );
     }
@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
 
     if (existingUser.rows.length > 0) {
       return NextResponse.json(
-        { error: "এই ইমেইল দিয়ে ইতিমধ্যে একটি অ্যাকাউন্ট তৈরি করা আছে। দয়া করে লগইন করুন।" },
+        { error: "An account with this email already exists. Please sign in." },
         { status: 400 }
       );
     }
@@ -49,6 +49,7 @@ export async function POST(req: NextRequest) {
     );
 
     // 4. Send the OTP email via Resend
+    console.log(`[OTP Generated] Email: ${cleanEmail} | OTP: ${otp}`);
     const emailResult = await sendVerificationOtpEmail({
       to: cleanEmail,
       name,
@@ -56,24 +57,26 @@ export async function POST(req: NextRequest) {
     });
 
     if (!emailResult.success) {
+      console.error("[OTP Send Error]:", emailResult.error);
       return NextResponse.json(
         {
           error:
-            "ইমেইল পাঠাতে সমস্যা হয়েছে। দয়া করে নিশ্চিত করুন আপনার ইমেইল সঠিক এবং আবার চেষ্টা করুন।",
+            emailResult.error ||
+            "Unable to send verification code. Please check that your email address is correct and try again.",
         },
-        { status: 500 }
+        { status: 400 }
       );
     }
 
     return NextResponse.json({
       success: true,
-      message: "আপনার ইমেইলে ৬ ডিজিটের ভেরিফিকেশন কোড পাঠানো হয়েছে!",
+      message: "A 6-digit verification code has been sent to your email.",
     });
   } catch (error: unknown) {
-    console.error("[OTP Send API Error]:", error);
+    console.error("[OTP Send API Exception]:", error);
     const msg = error instanceof Error ? error.message : "Internal Server Error";
     return NextResponse.json(
-      { error: `সার্ভার ত্রুটি: ${msg}` },
+      { error: `Server error: ${msg}` },
       { status: 500 }
     );
   }

@@ -101,7 +101,7 @@ export default function OtpVerificationModal({
     if (e) e.preventDefault();
     const otp = digits.join("");
     if (otp.length < 6) {
-      toast.error("অনুগ্রহ করে ৬ ডিজিটের সম্পূর্ণ ওটিপি কোডটি লিখুন।");
+      toast.error("Please enter the complete 6-digit verification code.");
       return;
     }
 
@@ -152,13 +152,13 @@ export default function OtpVerificationModal({
         {/* Title & Email */}
         <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[11px] font-semibold mb-2">
           <ShieldCheck className="w-3.5 h-3.5" />
-          <span>ইমেইল ভেরিফিকেশন</span>
+          <span>Email Verification</span>
         </div>
         <h3 className="text-xl font-bold text-text-main tracking-tight">
-          ভেরিফিকেশন কোড লিখুন
+          Enter Verification Code
         </h3>
         <p className="text-xs text-text-muted mt-1.5 leading-relaxed px-2">
-          প্রিয় <strong className="text-text-main">{name || "সম্মানিত গ্রাহক"}</strong>, আমরা একটি ৬ ডিজিটের ভেরিফিকেশন কোড পাঠিয়েছি:
+          Hi <strong className="text-text-main">{name || "Valued Customer"}</strong>, we sent a 6-digit verification code to:
         </p>
         <p className="text-xs font-semibold text-brand mt-0.5 break-all">
           {email}
@@ -199,7 +199,7 @@ export default function OtpVerificationModal({
               <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
             ) : (
               <>
-                <span>ভেরিফাই ও সম্পন্ন করুন</span>
+                <span>Verify & Create Account</span>
                 <ArrowRight className="w-4 h-4" />
               </>
             )}
@@ -213,7 +213,7 @@ export default function OtpVerificationModal({
             onClick={onCancel}
             className="hover:text-text-main cursor-pointer"
           >
-            ইমেইল ভুল? পরিবর্তন করুন
+            Wrong email? Change
           </button>
 
           <button
@@ -230,7 +230,7 @@ export default function OtpVerificationModal({
               <RefreshCw className="w-3.5 h-3.5 animate-spin" />
             ) : null}
             <span>
-              {countdown > 0 ? `পুনরায় পাঠান (${countdown}s)` : "কোড পাননি? পুনরায় পাঠান"}
+              {countdown > 0 ? `Resend in ${countdown}s` : "Didn't receive? Resend"}
             </span>
           </button>
         </div>

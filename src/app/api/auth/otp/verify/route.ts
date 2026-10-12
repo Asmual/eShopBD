@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
 
     if (!email || !otp || !password) {
       return NextResponse.json(
-        { error: "ইমেইল, পাসওয়ার্ড এবং ওটিপি কোড বাধ্যতামূলক।" },
+        { error: "Email, password, and verification code are required." },
         { status: 400 }
       );
     }
@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
 
     if (result.rows.length === 0) {
       return NextResponse.json(
-        { error: "কোনো ভেরিফিকেশন কোড পাওয়া যায়নি। দয়া করে নতুন কোডের জন্য অনুরোধ করুন।" },
+        { error: "No verification code found for this email. Please request a new code." },
         { status: 400 }
       );
     }
@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
     // 2. Check if code matches
     if (verificationRecord.value !== cleanOtp) {
       return NextResponse.json(
-        { error: "ভুল ওটিপি কোড! দয়া করে আপনার ইমেইল চেক করে সঠিক ৬ ডিজিটের কোডটি দিন।" },
+        { error: "Invalid verification code. Please check your email and enter the correct 6-digit code." },
         { status: 400 }
       );
     }
@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
     // 3. Check expiration
     if (new Date(verificationRecord.expiresAt) < new Date()) {
       return NextResponse.json(
-        { error: "এই ওটিপি কোডের ১০ মিনিটের মেয়াদ শেষ হয়ে গেছে। দয়া করে নতুন কোড পাঠান।" },
+        { error: "This verification code has expired. Please request a new code." },
         { status: 400 }
       );
     }
@@ -84,7 +84,6 @@ export async function POST(req: NextRequest) {
     );
 
     // 7. Send the Welcome Email via Resend
-    // Send asynchronously in background so response isn't delayed
     sendWelcomeEmail({
       to: cleanEmail,
       name: name || cleanEmail.split("@")[0],
@@ -94,13 +93,13 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      message: "অ্যাকাউন্ট সফলভাবে ভেরিফাই ও তৈরি হয়েছে! স্বাগতম eShopBD-তে।",
+      message: "Account verified and created successfully! Welcome to eShopBD.",
     });
   } catch (error: unknown) {
     console.error("[OTP Verify API Error]:", error);
     const msg = error instanceof Error ? error.message : "Internal Server Error";
     return NextResponse.json(
-      { error: `ভেরিফিকেশন সম্পন্ন করা যায়নি: ${msg}` },
+      { error: `Verification failed: ${msg}` },
       { status: 500 }
     );
   }

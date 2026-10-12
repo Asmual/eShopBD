@@ -52,18 +52,22 @@ export default function RegisterForm({ onSwitchToLogin }: RegisterFormProps) {
       const result = await res.json();
 
       if (!res.ok) {
-        toast.error(result.error || "ভেরিফিকেশন কোড পাঠানো যায়নি।");
+        toast.error(
+          result.error || "Unable to send verification code. Please try again."
+        );
         return;
       }
 
       setPendingRegistration(data);
       setShowOtpModal(true);
-      toast.success("আপনার ইমেইলে ৬ ডিজিটের ওটিপি কোড পাঠানো হয়েছে!", {
+      toast.success("A 6-digit verification code has been sent to your email!", {
         icon: "📨",
       });
     } catch (err: unknown) {
       const msg =
-        err instanceof Error ? err.message : "ওটিপি পাঠাতে সমস্যা হয়েছে।";
+        err instanceof Error
+          ? err.message
+          : "Failed to send verification code. Please try again.";
       toast.error(msg);
     } finally {
       setIsLoading(false);
@@ -87,7 +91,7 @@ export default function RegisterForm({ onSwitchToLogin }: RegisterFormProps) {
       const result = await res.json();
 
       if (!res.ok) {
-        toast.error(result.error || "ভেরিফিকেশন সম্পন্ন করা যায়নি।");
+        toast.error(result.error || "Failed to verify code. Please try again.");
         return false;
       }
 
@@ -113,7 +117,7 @@ export default function RegisterForm({ onSwitchToLogin }: RegisterFormProps) {
       }
 
       toast.success(
-        `স্বাগতম ${pendingRegistration.fullName}! আপনার অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে।`,
+        `Welcome ${pendingRegistration.fullName}! Your account has been created successfully.`,
         { icon: "🎉", duration: 4000 }
       );
 
@@ -123,7 +127,9 @@ export default function RegisterForm({ onSwitchToLogin }: RegisterFormProps) {
       return true;
     } catch (err: unknown) {
       const msg =
-        err instanceof Error ? err.message : "ভেরিফিকেশন ব্যর্থ হয়েছে।";
+        err instanceof Error
+          ? err.message
+          : "Verification failed. Please try again.";
       toast.error(msg);
       return false;
     }
@@ -143,14 +149,16 @@ export default function RegisterForm({ onSwitchToLogin }: RegisterFormProps) {
       const result = await res.json();
 
       if (!res.ok) {
-        toast.error(result.error || "নতুন কোড পাঠানো যায়নি।");
+        toast.error(result.error || "Unable to resend verification code.");
         return false;
       }
 
-      toast.success("নতুন ভেরিফিকেশন কোড পাঠানো হয়েছে!", { icon: "📨" });
+      toast.success("A new verification code has been sent to your email!", {
+        icon: "📨",
+      });
       return true;
     } catch {
-      toast.error("কোড পুনরায় পাঠাতে সমস্যা হয়েছে।");
+      toast.error("Failed to resend code. Please try again.");
       return false;
     }
   };
