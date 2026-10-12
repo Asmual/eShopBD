@@ -3,20 +3,27 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import confetti from "canvas-confetti";
 import { User, Mail, Lock, Eye, EyeOff, ArrowRight } from "lucide-react";
 import toast from "react-hot-toast";
 import { signUp, signIn } from "@/lib/auth-client";
 import { registerSchema } from "../schemas";
 import { RegisterFormData } from "../types";
+import OtpVerificationModal from "./OtpVerificationModal";
 
 interface RegisterFormProps {
   onSwitchToLogin: () => void;
 }
 
 export default function RegisterForm({ onSwitchToLogin }: RegisterFormProps) {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [showOtpModal, setShowOtpModal] = useState(false);
+  const [pendingRegistration, setPendingRegistration] =
+    useState<RegisterFormData | null>(null);
 
   const {
     register,
@@ -36,29 +43,115 @@ export default function RegisterForm({ onSwitchToLogin }: RegisterFormProps) {
   const onSubmit = async (data: RegisterFormData) => {
     setIsLoading(true);
     try {
-      const res = await signUp.email({
-        email: data.email,
-        password: data.password,
-        name: data.fullName,
+      // Step 1: Send 6-digit OTP to user's email via Resend
+      const res = await fetch("/api/auth/otp/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: data.email, name: data.fullName }),
       });
+      const result = await res.json();
 
-      if (res?.error) {
-        toast.error(res.error.message || "Failed to create account");
+      if (!res.ok) {
+        toast.error(result.error || "ভেরিফিকেশন কোড পাঠানো যায়নি।");
         return;
       }
 
-      toast.success(
-        `Account created successfully for ${data.fullName}! Please sign in.`
-      );
-      onSwitchToLogin();
+      setPendingRegistration(data);
+      setShowOtpModal(true);
+      toast.success("আপনার ইমেইলে ৬ ডিজিটের ওটিপি কোড পাঠানো হয়েছে!", {
+        icon: "📨",
+      });
     } catch (err: unknown) {
       const msg =
-        err instanceof Error
-          ? err.message
-          : "Registration failed. Please try again.";
+        err instanceof Error ? err.message : "ওটিপি পাঠাতে সমস্যা হয়েছে।";
       toast.error(msg);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleVerifyOtp = async (otp: string): Promise<boolean> => {
+    if (!pendingRegistration) return false;
+    try {
+      // Step 2: Verify OTP in Neon DB and create account
+      const res = await fetch("/api/auth/otp/verify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: pendingRegistration.email,
+          otp,
+          name: pendingRegistration.fullName,
+          password: pendingRegistration.password,
+        }),
+      });
+      const result = await res.json();
+
+      if (!res.ok) {
+        toast.error(result.error || "ভেরিফিকেশন সম্পন্ন করা যায়নি।");
+        return false;
+      }
+
+      // Step 3: Auto-sign in the verified user
+      try {
+        await signIn.email({
+          email: pendingRegistration.email,
+          password: pendingRegistration.password,
+        });
+      } catch {
+        // Fallback
+      }
+
+      // Confetti celebration
+      try {
+        confetti({
+          particleCount: 80,
+          spread: 70,
+          origin: { y: 0.6 },
+        });
+      } catch {
+        // Safe fallback
+      }
+
+      toast.success(
+        `স্বাগতম ${pendingRegistration.fullName}! আপনার অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে।`,
+        { icon: "🎉", duration: 4000 }
+      );
+
+      setShowOtpModal(false);
+      router.push("/");
+      router.refresh();
+      return true;
+    } catch (err: unknown) {
+      const msg =
+        err instanceof Error ? err.message : "ভেরিফিকেশন ব্যর্থ হয়েছে।";
+      toast.error(msg);
+      return false;
+    }
+  };
+
+  const handleResendOtp = async (): Promise<boolean> => {
+    if (!pendingRegistration) return false;
+    try {
+      const res = await fetch("/api/auth/otp/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: pendingRegistration.email,
+          name: pendingRegistration.fullName,
+        }),
+      });
+      const result = await res.json();
+
+      if (!res.ok) {
+        toast.error(result.error || "নতুন কোড পাঠানো যায়নি।");
+        return false;
+      }
+
+      toast.success("নতুন ভেরিফিকেশন কোড পাঠানো হয়েছে!", { icon: "📨" });
+      return true;
+    } catch {
+      toast.error("কোড পুনরায় পাঠাতে সমস্যা হয়েছে।");
+      return false;
     }
   };
 
@@ -351,6 +444,17 @@ export default function RegisterForm({ onSwitchToLogin }: RegisterFormProps) {
           </button>
         </p>
       </div>
+
+      {/* 6-Digit Email OTP Verification Modal */}
+      <OtpVerificationModal
+        isOpen={showOtpModal}
+        email={pendingRegistration?.email || ""}
+        name={pendingRegistration?.fullName || ""}
+        onVerifyOtp={handleVerifyOtp}
+        onResendOtp={handleResendOtp}
+        onSuccess={() => setShowOtpModal(false)}
+        onCancel={() => setShowOtpModal(false)}
+      />
     </div>
   );
 }
