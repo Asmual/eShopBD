@@ -3,7 +3,7 @@ import { Product } from "@/types/products";
 import { ALL_PRODUCTS } from "@/data/products";
 
 const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
+  process.env.NEXT_PUBLIC_API_URL || "https://eshopbd-server.onrender.com/api";
 
 export const apiClient = axios.create({
   baseURL: API_BASE_URL,
