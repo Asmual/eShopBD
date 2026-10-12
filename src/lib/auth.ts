@@ -1,8 +1,15 @@
 import { betterAuth } from "better-auth";
+import { Pool } from "pg";
 
 export const auth = betterAuth({
+  database: new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: { rejectUnauthorized: false },
+  }),
   baseURL: process.env.BETTER_AUTH_URL || "http://localhost:3000",
-  secret: process.env.BETTER_AUTH_SECRET || "2fe2ce010626173d62097f5fd62755c16b987d9d6b76b30d5e69aae0dc8e330d",
+  secret:
+    process.env.BETTER_AUTH_SECRET ||
+    "2fe2ce010626173d62097f5fd62755c16b987d9d6b76b30d5e69aae0dc8e330d",
   emailAndPassword: {
     enabled: true,
   },
