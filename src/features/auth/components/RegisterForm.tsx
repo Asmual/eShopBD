@@ -62,23 +62,20 @@ export default function RegisterForm({ onSwitchToLogin }: RegisterFormProps) {
     }
   };
 
-  const handleSocialRegister = async (provider: string) => {
-    if (provider.toLowerCase() === "google") {
-      setIsLoading(true);
-      try {
-        await signIn.social({
-          provider: "google",
-          callbackURL: "/",
-        });
-      } catch (err: unknown) {
-        const msg = err instanceof Error ? err.message : "Failed to connect with Google";
-        toast.error(msg);
-        setIsLoading(false);
-      }
-    } else {
-      toast(`${provider} registration will be available soon!`, {
-        icon: "ℹ️",
+  const handleSocialRegister = async (provider: "google" | "facebook") => {
+    setIsLoading(true);
+    try {
+      await signIn.social({
+        provider,
+        callbackURL: "/",
       });
+    } catch (err: unknown) {
+      const msg =
+        err instanceof Error
+          ? err.message
+          : `Failed to connect with ${provider}`;
+      toast.error(msg);
+      setIsLoading(false);
     }
   };
 
@@ -101,7 +98,7 @@ export default function RegisterForm({ onSwitchToLogin }: RegisterFormProps) {
       <div className="grid grid-cols-2 gap-2.5 mb-3">
         <button
           type="button"
-          onClick={() => handleSocialRegister("Google")}
+          onClick={() => handleSocialRegister("google")}
           className="flex items-center justify-center gap-2 px-3 py-1.5 bg-white border border-border-light hover:border-brand/40 hover:bg-brand-light/30 rounded-xl text-xs sm:text-sm font-semibold text-text-main transition-all cursor-pointer shadow-2xs"
         >
           <svg className="w-4 h-4" viewBox="0 0 24 24">
@@ -127,7 +124,7 @@ export default function RegisterForm({ onSwitchToLogin }: RegisterFormProps) {
 
         <button
           type="button"
-          onClick={() => handleSocialRegister("Facebook")}
+          onClick={() => handleSocialRegister("facebook")}
           className="flex items-center justify-center gap-2 px-3 py-1.5 bg-white border border-border-light hover:border-brand/40 hover:bg-brand-light/30 rounded-xl text-xs sm:text-sm font-semibold text-text-main transition-all cursor-pointer shadow-2xs"
         >
           <svg className="w-4 h-4 fill-[#1877F2]" viewBox="0 0 24 24">
