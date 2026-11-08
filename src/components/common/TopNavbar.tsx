@@ -100,13 +100,13 @@ export default function TopNavbar({
 
             {/* Wishlist */}
             <Link
-              href="/customer/orders"
+              href="/wishlist"
               className="relative flex items-center text-text-main hover:text-brand transition-colors p-1"
-              aria-label="Wishlist (0 items)"
+              aria-label="Wishlist"
             >
               <Heart className="w-4.5 h-4.5 text-text-main hover:text-brand transition-colors" />
               <span className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-brand text-white text-[9px] font-bold rounded-full flex items-center justify-center">
-                0
+                3
               </span>
             </Link>
 

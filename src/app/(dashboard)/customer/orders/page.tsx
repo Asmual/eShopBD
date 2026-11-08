@@ -56,7 +56,7 @@ const DEMO_CUSTOMER_ORDERS: CustomerOrder[] = [
       {
         id: "i-2",
         name: "Premium Embroidered Traditional Kurti Set",
-        image: "/images/categories/category-women.jpg",
+        image: "/images/all products/dresses/0c30a90386ae6960fee38f620f85b72d.jpg",
         quantity: 1,
         price: 2150,
         variant: "Size: L",

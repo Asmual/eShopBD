@@ -30,8 +30,6 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
-
 # vercel
 .vercel
 
@@ -40,7 +38,6 @@ yarn-error.log*
 next-env.d.ts
 
 config.bat
-
 api.js
 director.js
 
@@ -49,6 +46,11 @@ director.js
 .env.test.local
 .env.production.local
 *.env
+.env
+.env.*
+.env.local
+.env.production
+.vscode/
 
 *.orc
 *.eot
@@ -69,10 +71,3 @@ public/fonts/
 .envrc
 .venv/
 venv/
-
-
-.env
-.env.*
-.env.local
-.env.production
-.vscode/

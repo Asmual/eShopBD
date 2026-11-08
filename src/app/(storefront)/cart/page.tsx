@@ -43,7 +43,7 @@ const INITIAL_CART_ITEMS: CartItem[] = [
     id: "cart-2",
     name: "Premium Embroidered Traditional Kurti Set",
     category: "Women's Fashion",
-    image: "/images/categories/category-women.jpg",
+    image: "/images/all products/dresses/0c30a90386ae6960fee38f620f85b72d.jpg",
     price: 2150,
     originalPrice: 2850,
     quantity: 2,
