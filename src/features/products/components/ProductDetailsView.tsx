@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -15,9 +15,11 @@ import {
   RotateCcw,
   Check,
   ChevronRight,
+  ChevronLeft,
   Package,
   Layers,
   Award,
+  ZoomIn,
 } from "lucide-react";
 import toast from "react-hot-toast";
 import { Product } from "@/types/products";
@@ -41,13 +43,39 @@ export default function ProductDetailsView({
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [isAdded, setIsAdded] = useState(false);
 
-  // Gallery images using product and complementary images
-  const galleryImages = [
-    product.image,
-    "/images/categories/category-electronics.jpg",
-    "/images/categories/category-women.jpg",
-    "/images/categories/category-men2.jpg",
-  ];
+  // Dynamic category-aware gallery images
+  const galleryImages = useMemo(() => {
+    const list = [product.image];
+    // Pick complementary verified images from the same category
+    const sameCategoryItems = relatedProducts.filter(
+      (p) => p.category === product.category && p.image !== product.image
+    );
+    sameCategoryItems.slice(0, 3).forEach((p) => {
+      if (!list.includes(p.image)) list.push(p.image);
+    });
+
+    // Fallbacks if single item in category
+    if (list.length < 4) {
+      relatedProducts.forEach((p) => {
+        if (list.length < 4 && !list.includes(p.image)) {
+          list.push(p.image);
+        }
+      });
+    }
+    return list.slice(0, 4);
+  }, [product, relatedProducts]);
+
+  const currentImageIdx = galleryImages.indexOf(selectedImage) >= 0 ? galleryImages.indexOf(selectedImage) : 0;
+
+  const handlePrevImage = () => {
+    const nextIdx = (currentImageIdx - 1 + galleryImages.length) % galleryImages.length;
+    setSelectedImage(galleryImages[nextIdx]);
+  };
+
+  const handleNextImage = () => {
+    const nextIdx = (currentImageIdx + 1) % galleryImages.length;
+    setSelectedImage(galleryImages[nextIdx]);
+  };
 
   const handleToggleWishlist = () => {
     setIsWishlisted((prev) => !prev);
@@ -127,6 +155,33 @@ export default function ProductDetailsView({
                       {product.discountPercent}% OFF
                     </span>
                   </div>
+                )}
+
+                {/* Image Counter Pill */}
+                <div className="absolute bottom-3 left-3 z-10 px-2.5 py-1 rounded-md bg-black/60 backdrop-blur-xs text-white text-[10px] font-mono font-bold">
+                  {currentImageIdx + 1} / {galleryImages.length}
+                </div>
+
+                {/* Left/Right Quick Switch Arrows on Image Hover */}
+                {galleryImages.length > 1 && (
+                  <>
+                    <button
+                      type="button"
+                      onClick={handlePrevImage}
+                      aria-label="Previous image"
+                      className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-white/90 hover:bg-white text-text-main flex items-center justify-center shadow-md opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
+                    >
+                      <ChevronLeft className="w-4 h-4" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleNextImage}
+                      aria-label="Next image"
+                      className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-white/90 hover:bg-white text-text-main flex items-center justify-center shadow-md opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
+                    >
+                      <ChevronRight className="w-4 h-4" />
+                    </button>
+                  </>
                 )}
 
                 {/* Floating Wishlist & Share Buttons */}
