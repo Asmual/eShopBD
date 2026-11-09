@@ -65,7 +65,22 @@ export default function ProductDetailsView({
     return list.slice(0, 4);
   }, [product, relatedProducts]);
 
-  const currentImageIdx = galleryImages.indexOf(selectedImage) >= 0 ? galleryImages.indexOf(selectedImage) : 0;
+  const [selectedDistrict, setSelectedDistrict] = useState("Dhaka");
+
+  const deliveryFee = selectedDistrict === "Dhaka" ? "৳60" : selectedDistrict === "Gazipur" ? "৳100" : "৳120";
+  const deliveryTime = selectedDistrict === "Dhaka" ? "24–48 Hours" : selectedDistrict === "Gazipur" ? "48–72 Hours" : "3–5 Days";
+
+  // Category specific variants
+  const isFashion = product.category === "women" || product.category === "men";
+  const isToys = product.category === "toys-games" || product.category === "kids";
+
+  const colorOptions = isFashion
+    ? ["Crimson Red", "Emerald Green", "Midnight Blue", "Classic Black"]
+    : isToys
+    ? ["Standard Edition", "STEM Deluxe Set", "Family Gift Bundle"]
+    : ["Matte Black", "Forest Green", "Silver Metal", "Glacier White"];
+
+  const sizeOptions = isFashion ? ["S (38)", "M (40)", "L (42)", "XL (44)", "XXL (46)"] : null;
 
   const handlePrevImage = () => {
     const nextIdx = (currentImageIdx - 1 + galleryImages.length) % galleryImages.length;
@@ -306,33 +321,70 @@ export default function ProductDetailsView({
                     "Engineered with premium quality standards for exceptional durability and day-to-day excellence. Certified authentic and backed by our comprehensive warranty guarantee."}
                 </p>
 
-                {/* Selectors: Color / Option */}
-                <div className="space-y-4 mb-6">
+                {/* Selectors: Options, Sizes & Quantity */}
+                <div className="space-y-3.5 mb-5">
+                  {/* Color / Variant */}
                   <div>
-                    <label className="text-xs font-bold text-text-main block mb-1.5">
-                      Select Option: <span className="text-text-muted font-normal">{selectedColor}</span>
+                    <label className="text-xs font-bold text-text-main block mb-1">
+                      {isFashion ? "Select Color:" : isToys ? "Select Pack:" : "Select Model / Color:"}{" "}
+                      <span className="text-brand font-semibold">
+                        {selectedColor === "Default" ? colorOptions[0] : selectedColor}
+                      </span>
                     </label>
-                    <div className="flex items-center gap-2">
-                      {["Default", "Classic Emerald", "Obsidian Black", "Pearl White"].map((opt) => (
-                        <button
-                          key={opt}
-                          type="button"
-                          onClick={() => setSelectedColor(opt)}
-                          className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all cursor-pointer ${
-                            selectedColor === opt
-                              ? "border-brand bg-brand text-white shadow-2xs"
-                              : "border-border-light bg-white text-text-muted hover:border-brand/40 hover:text-text-main"
-                          }`}
-                        >
-                          {opt}
-                        </button>
-                      ))}
+                    <div className="flex items-center gap-1.5 flex-wrap">
+                      {colorOptions.map((opt) => {
+                        const isSel = selectedColor === opt || (selectedColor === "Default" && opt === colorOptions[0]);
+                        return (
+                          <button
+                            key={opt}
+                            type="button"
+                            onClick={() => setSelectedColor(opt)}
+                            className={`px-3 py-1 rounded-lg text-xs font-semibold border transition-all cursor-pointer ${
+                              isSel
+                                ? "border-brand bg-brand text-white shadow-2xs"
+                                : "border-border-light bg-white text-text-muted hover:border-brand/40 hover:text-text-main"
+                            }`}
+                          >
+                            {opt}
+                          </button>
+                        );
+                      })}
                     </div>
                   </div>
 
+                  {/* Size Selector for Fashion */}
+                  {sizeOptions && (
+                    <div>
+                      <div className="flex items-center justify-between mb-1">
+                        <label className="text-xs font-bold text-text-main block">
+                          Select Size: <span className="text-brand font-semibold">{selectedSize}</span>
+                        </label>
+                        <Link href="/size-guide" className="text-[11px] text-brand hover:underline font-semibold">
+                          Size Guide →
+                        </Link>
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        {sizeOptions.map((sz) => (
+                          <button
+                            key={sz}
+                            type="button"
+                            onClick={() => setSelectedSize(sz)}
+                            className={`px-3 py-1 rounded-lg text-xs font-bold border transition-all cursor-pointer ${
+                              selectedSize === sz
+                                ? "border-brand bg-brand text-white shadow-2xs"
+                                : "border-border-light bg-white text-text-muted hover:border-brand/40"
+                            }`}
+                          >
+                            {sz}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
                   {/* Quantity Counter */}
                   <div>
-                    <label className="text-xs font-bold text-text-main block mb-1.5">
+                    <label className="text-xs font-bold text-text-main block mb-1">
                       Quantity:
                     </label>
                     <div className="inline-flex items-center border border-border-light rounded-xl overflow-hidden bg-white shadow-2xs">
@@ -340,20 +392,50 @@ export default function ProductDetailsView({
                         type="button"
                         onClick={() => setQuantity((q) => Math.max(1, q - 1))}
                         disabled={quantity <= 1}
-                        className="w-9 h-9 flex items-center justify-center text-text-muted hover:text-text-main hover:bg-gray-100 disabled:opacity-40 transition-colors cursor-pointer text-base font-bold"
+                        className="w-8 h-8 flex items-center justify-center text-text-muted hover:text-text-main hover:bg-gray-100 disabled:opacity-40 transition-colors cursor-pointer text-sm font-bold"
                       >
                         -
                       </button>
-                      <span className="w-12 text-center text-xs sm:text-sm font-bold text-text-main">
+                      <span className="w-10 text-center text-xs font-bold text-text-main">
                         {quantity}
                       </span>
                       <button
                         type="button"
                         onClick={() => setQuantity((q) => q + 1)}
-                        className="w-9 h-9 flex items-center justify-center text-text-muted hover:text-text-main hover:bg-gray-100 transition-colors cursor-pointer text-base font-bold"
+                        className="w-8 h-8 flex items-center justify-center text-text-muted hover:text-text-main hover:bg-gray-100 transition-colors cursor-pointer text-sm font-bold"
                       >
                         +
                       </button>
+                    </div>
+                  </div>
+
+                  {/* Interactive Delivery Estimator Box */}
+                  <div className="p-3 rounded-xl bg-brand-surface/70 border border-border-light text-xs space-y-1.5">
+                    <div className="flex items-center justify-between">
+                      <span className="font-bold text-text-main flex items-center gap-1.5">
+                        <Truck className="w-3.5 h-3.5 text-brand" />
+                        <span>Delivery Destination</span>
+                      </span>
+                      <select
+                        value={selectedDistrict}
+                        onChange={(e) => setSelectedDistrict(e.target.value)}
+                        className="px-2 py-0.5 text-[11px] rounded-md border border-border-light bg-white text-text-main font-semibold focus:outline-hidden focus:border-brand"
+                      >
+                        <option value="Dhaka">Dhaka City</option>
+                        <option value="Gazipur">Gazipur / Suburbs</option>
+                        <option value="Chittagong">Chittagong</option>
+                        <option value="Sylhet">Sylhet</option>
+                        <option value="Rajshahi">Rajshahi</option>
+                        <option value="Khulna">Khulna</option>
+                        <option value="Barishal">Barishal</option>
+                        <option value="Rangpur">Rangpur</option>
+                      </select>
+                    </div>
+                    <div className="flex items-center justify-between text-[11px] text-text-muted pt-0.5">
+                      <span>Fee: <strong className="text-text-main">{deliveryFee}</strong> ({deliveryTime})</span>
+                      <span className="text-emerald-700 font-bold bg-emerald-50 px-1.5 py-0.2 rounded text-[10px]">
+                        Cash on Delivery Available
+                      </span>
                     </div>
                   </div>
                 </div>
