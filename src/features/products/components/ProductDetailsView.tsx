@@ -82,6 +82,63 @@ export default function ProductDetailsView({
 
   const sizeOptions = isFashion ? ["S (38)", "M (40)", "L (42)", "XL (44)", "XXL (46)"] : null;
 
+  // Interactive Reviews State
+  const [showReviewForm, setShowReviewForm] = useState(false);
+  const [userRating, setUserRating] = useState(5);
+  const [reviewName, setReviewName] = useState("");
+  const [reviewComment, setReviewComment] = useState("");
+  const [reviewsList, setReviewsList] = useState([
+    {
+      id: "r-1",
+      author: "Tariqul Islam",
+      verified: true,
+      rating: 5,
+      date: "2 days ago",
+      text: "Product arrived on time and the build quality exceeded my expectations. Completely satisfied with the purchase!",
+      helpful: 8,
+    },
+    {
+      id: "r-2",
+      author: "Nusrat Jahan",
+      verified: true,
+      rating: 5,
+      date: "1 week ago",
+      text: "Original product just as shown in photos. Packaging was intact and dispatch was very fast.",
+      helpful: 5,
+    },
+    {
+      id: "r-3",
+      author: "Kabir Hossain",
+      verified: true,
+      rating: 4,
+      date: "2 weeks ago",
+      text: "Good product. Finish is great. Sound and battery performance matches the description.",
+      helpful: 3,
+    },
+  ]);
+
+  const handleReviewSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!reviewName.trim() || !reviewComment.trim()) {
+      toast.error("Please enter your name and comment.");
+      return;
+    }
+    const newRev = {
+      id: `r-${Date.now()}`,
+      author: reviewName.trim(),
+      verified: true,
+      rating: userRating,
+      date: "Just now",
+      text: reviewComment.trim(),
+      helpful: 0,
+    };
+    setReviewsList([newRev, ...reviewsList]);
+    setReviewName("");
+    setReviewComment("");
+    setShowReviewForm(false);
+    toast.success("Thank you! Your verified review has been published.");
+  };
+
   const handlePrevImage = () => {
     const nextIdx = (currentImageIdx - 1 + galleryImages.length) % galleryImages.length;
     setSelectedImage(galleryImages[nextIdx]);
@@ -578,24 +635,32 @@ export default function ProductDetailsView({
               <table className="w-full text-xs sm:text-sm text-left border border-border-light rounded-xl overflow-hidden">
                 <tbody className="divide-y divide-border-light">
                   <tr className="bg-gray-50/60">
-                    <td className="py-2.5 px-4 font-bold text-text-main w-1/3">Brand / Manufacturer</td>
-                    <td className="py-2.5 px-4 text-text-muted">eShopBD Official Vendor</td>
+                    <td className="py-2.5 px-4 font-bold text-text-main w-1/3">Product Name</td>
+                    <td className="py-2.5 px-4 text-text-main font-semibold">{product.name}</td>
                   </tr>
                   <tr>
-                    <td className="py-2.5 px-4 font-bold text-text-main">Category</td>
+                    <td className="py-2.5 px-4 font-bold text-text-main">Category / Department</td>
                     <td className="py-2.5 px-4 text-text-muted">{product.categoryName}</td>
                   </tr>
                   <tr className="bg-gray-50/60">
-                    <td className="py-2.5 px-4 font-bold text-text-main">Item SKU</td>
-                    <td className="py-2.5 px-4 text-text-muted font-mono">{product.id.toUpperCase()}-2026</td>
+                    <td className="py-2.5 px-4 font-bold text-text-main">Item SKU & Barcode</td>
+                    <td className="py-2.5 px-4 text-text-muted font-mono">{product.id.toUpperCase()}-BD-2026</td>
                   </tr>
                   <tr>
-                    <td className="py-2.5 px-4 font-bold text-text-main">Warranty Period</td>
-                    <td className="py-2.5 px-4 text-text-muted">1 Year Official Service Warranty</td>
+                    <td className="py-2.5 px-4 font-bold text-text-main">Authenticity Guarantee</td>
+                    <td className="py-2.5 px-4 text-emerald-700 font-semibold">100% Genuine Certified Supplier</td>
                   </tr>
                   <tr className="bg-gray-50/60">
-                    <td className="py-2.5 px-4 font-bold text-text-main">Origin & Certification</td>
-                    <td className="py-2.5 px-4 text-text-muted">Authentic Grade A Tested</td>
+                    <td className="py-2.5 px-4 font-bold text-text-main">Warranty Coverage</td>
+                    <td className="py-2.5 px-4 text-text-muted">1 Year Official Service Warranty</td>
+                  </tr>
+                  <tr>
+                    <td className="py-2.5 px-4 font-bold text-text-main">Return & Exchange Window</td>
+                    <td className="py-2.5 px-4 text-text-muted">7 Days Hassle-Free Replacement Policy</td>
+                  </tr>
+                  <tr className="bg-gray-50/60">
+                    <td className="py-2.5 px-4 font-bold text-text-main">Package Contents</td>
+                    <td className="py-2.5 px-4 text-text-muted">1x Main Product, User Manual, Official Warranty Card, Security Sealed Box</td>
                   </tr>
                 </tbody>
               </table>
@@ -603,54 +668,138 @@ export default function ProductDetailsView({
           )}
 
           {activeTab === "reviews" && (
-            <div className="space-y-4">
-              <div className="flex items-center gap-3 p-4 bg-brand-light/30 rounded-xl border border-brand/10">
-                <div className="text-3xl sm:text-4xl font-black text-brand">
-                  {product.rating.toFixed(1)}
-                </div>
-                <div>
-                  <div className="flex items-center text-amber-400">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-3.5 h-3.5 fill-current" />
-                    ))}
+            <div className="space-y-5">
+              {/* Review Score Summary Box */}
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-4 sm:p-5 bg-brand-light/40 rounded-xl border border-brand/10">
+                <div className="flex items-center gap-4">
+                  <div className="text-3xl sm:text-4xl font-black text-brand leading-none">
+                    {product.rating.toFixed(1)}
                   </div>
-                  <span className="text-xs text-text-muted">
-                    Based on {product.reviewsCount} verified purchases
-                  </span>
+                  <div>
+                    <div className="flex items-center text-amber-400 mb-1">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="w-4 h-4 fill-current" />
+                      ))}
+                    </div>
+                    <p className="text-xs text-text-muted">
+                      Based on {product.reviewsCount} verified purchases
+                    </p>
+                  </div>
                 </div>
+
+                <button
+                  type="button"
+                  onClick={() => setShowReviewForm((prev) => !prev)}
+                  className="px-4 py-2 bg-brand hover:bg-brand-hover text-white text-xs font-bold rounded-xl shadow-2xs transition-colors self-start sm:self-auto cursor-pointer"
+                >
+                  {showReviewForm ? "Cancel Review" : "Write a Verified Review"}
+                </button>
               </div>
 
-              {/* Sample verified review cards */}
-              <div className="space-y-3 pt-2">
-                <div className="p-3.5 rounded-xl border border-border-light bg-gray-50/40">
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="text-xs font-bold text-text-main">Tariqul Islam (Verified Buyer)</span>
-                    <span className="text-[10px] text-text-muted">2 days ago</span>
-                  </div>
-                  <div className="flex items-center text-amber-400 mb-1.5">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-3 h-3 fill-current" />
-                    ))}
-                  </div>
-                  <p className="text-xs text-text-muted">
-                    &quot;Product arrived on time and the build quality exceeded my expectations. Completely satisfied with the purchase!&quot;
-                  </p>
-                </div>
+              {/* Interactive Write Review Form */}
+              {showReviewForm && (
+                <form
+                  onSubmit={handleReviewSubmit}
+                  className="p-4 rounded-xl border border-brand/30 bg-brand-surface/50 space-y-3 animate-in fade-in duration-200"
+                >
+                  <h4 className="text-xs font-bold text-text-main uppercase tracking-wider">
+                    Submit Your Customer Feedback
+                  </h4>
 
-                <div className="p-3.5 rounded-xl border border-border-light bg-gray-50/40">
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="text-xs font-bold text-text-main">Nusrat Jahan (Verified Buyer)</span>
-                    <span className="text-[10px] text-text-muted">1 week ago</span>
+                  {/* Rating Selector */}
+                  <div>
+                    <label className="text-[11px] font-semibold text-text-main block mb-1">
+                      Your Rating (1 to 5 Stars):
+                    </label>
+                    <div className="flex items-center gap-1 text-amber-400">
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <button
+                          key={star}
+                          type="button"
+                          onClick={() => setUserRating(star)}
+                          className="p-1 hover:scale-110 transition-transform cursor-pointer"
+                        >
+                          <Star
+                            className={`w-5 h-5 ${
+                              star <= userRating
+                                ? "fill-amber-400 text-amber-400"
+                                : "text-gray-300"
+                            }`}
+                          />
+                        </button>
+                      ))}
+                    </div>
                   </div>
-                  <div className="flex items-center text-amber-400 mb-1.5">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-3 h-3 fill-current" />
-                    ))}
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="text-[11px] font-semibold text-text-main block mb-1">
+                        Your Name *
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="e.g. Shakib Ahmed"
+                        value={reviewName}
+                        onChange={(e) => setReviewName(e.target.value)}
+                        className="w-full h-8 px-3 text-xs rounded-lg border border-border-light bg-white focus:outline-hidden focus:border-brand"
+                      />
+                    </div>
                   </div>
-                  <p className="text-xs text-text-muted">
-                    &quot;Original product just as shown in photos. Packaging was intact and dispatch was very fast.&quot;
-                  </p>
-                </div>
+
+                  <div>
+                    <label className="text-[11px] font-semibold text-text-main block mb-1">
+                      Your Review Experience *
+                    </label>
+                    <textarea
+                      required
+                      rows={3}
+                      placeholder="Share details about delivery speed, build quality, and usability..."
+                      value={reviewComment}
+                      onChange={(e) => setReviewComment(e.target.value)}
+                      className="w-full p-2.5 text-xs rounded-lg border border-border-light bg-white focus:outline-hidden focus:border-brand"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="px-4 py-1.5 bg-brand hover:bg-brand-hover text-white text-xs font-semibold rounded-lg shadow-2xs transition-colors cursor-pointer"
+                  >
+                    Post Review
+                  </button>
+                </form>
+              )}
+
+              {/* Verified Reviews Cards List */}
+              <div className="space-y-3 pt-1">
+                {reviewsList.map((rev) => (
+                  <div
+                    key={rev.id}
+                    className="p-3.5 rounded-xl border border-border-light bg-gray-50/50 hover:bg-white transition-all shadow-2xs"
+                  >
+                    <div className="flex items-center justify-between mb-1.5">
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs font-bold text-text-main">{rev.author}</span>
+                        {rev.verified && (
+                          <span className="text-[9px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-1.5 py-0.2 rounded-full">
+                            Verified Buyer
+                          </span>
+                        )}
+                      </div>
+                      <span className="text-[10px] text-text-muted">{rev.date}</span>
+                    </div>
+
+                    <div className="flex items-center text-amber-400 mb-1.5">
+                      {[...Array(rev.rating)].map((_, i) => (
+                        <Star key={i} className="w-3 h-3 fill-current" />
+                      ))}
+                    </div>
+
+                    <p className="text-xs text-text-muted leading-relaxed">
+                      &ldquo;{rev.text}&rdquo;
+                    </p>
+                  </div>
+                ))}
               </div>
             </div>
           )}
