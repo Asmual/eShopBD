@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Heart, Star, ShoppingCart, Zap, Check } from "lucide-react";
+import { Heart, Star, ShoppingCart, Zap, Check, Eye, ChevronRight } from "lucide-react";
 import toast from "react-hot-toast";
 import { Product } from "@/types/products";
 
@@ -96,15 +96,33 @@ export default function ProductCard({
         >
           <Heart className={`w-3.5 h-3.5 ${isWishlisted ? "fill-current text-red-500" : ""}`} />
         </button>
+
+        {/* Quick View Details Button on Image Hover */}
+        <Link
+          href={`/products/${product.slug}`}
+          className="absolute inset-x-3 bottom-2.5 z-10 py-1.5 px-2.5 bg-white/95 hover:bg-brand hover:text-white text-text-main text-[11px] font-bold rounded-lg shadow-sm border border-border-light/80 flex items-center justify-center gap-1.5 opacity-0 group-hover:opacity-100 transition-all duration-200 transform translate-y-1 group-hover:translate-y-0"
+        >
+          <Eye className="w-3.5 h-3.5" />
+          <span>View Details</span>
+        </Link>
       </div>
 
       {/* Content Section - Compact and Proportional */}
       <div className="p-2.5 sm:p-3 flex flex-col flex-1 justify-between gap-2">
         <div>
-          {/* Category Tag */}
-          <span className="text-[9px] sm:text-[10px] font-bold text-text-muted uppercase tracking-wider block truncate">
-            {product.categoryName}
-          </span>
+          {/* Category Tag & View Details Link */}
+          <div className="flex items-center justify-between">
+            <span className="text-[9px] sm:text-[10px] font-bold text-text-muted uppercase tracking-wider truncate">
+              {product.categoryName}
+            </span>
+            <Link
+              href={`/products/${product.slug}`}
+              className="text-[9px] sm:text-[10px] font-semibold text-brand hover:underline flex items-center gap-0.5"
+            >
+              <span>Details</span>
+              <ChevronRight className="w-2.5 h-2.5" />
+            </Link>
+          </div>
 
           {/* Product Title */}
           <Link
