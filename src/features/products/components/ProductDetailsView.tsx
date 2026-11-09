@@ -65,6 +65,8 @@ export default function ProductDetailsView({
     return list.slice(0, 4);
   }, [product, relatedProducts]);
 
+  const currentImageIdx = galleryImages.indexOf(selectedImage) !== -1 ? galleryImages.indexOf(selectedImage) : 0;
+
   const [selectedDistrict, setSelectedDistrict] = useState("Dhaka");
 
   const deliveryFee = selectedDistrict === "Dhaka" ? "৳60" : selectedDistrict === "Gazipur" ? "৳100" : "৳120";
@@ -807,17 +809,104 @@ export default function ProductDetailsView({
           {activeTab === "shipping" && (
             <div className="space-y-3 text-xs sm:text-sm text-text-muted leading-relaxed">
               <p>
-                <strong>Inside Dhaka:</strong> Delivery within 24 to 48 hours.
+                <strong>Inside Dhaka City:</strong> Delivery within 24 to 48 hours for ৳60.
               </p>
               <p>
-                <strong>Outside Dhaka:</strong> Delivery within 3 to 5 business days via verified courier services.
+                <strong>Outside Dhaka:</strong> Delivery within 3 to 5 business days across all 64 districts for ৳120.
               </p>
               <p>
-                <strong>Return Policy:</strong> If the product arrives damaged or does not match specifications, initiate a return within 7 calendar days from delivery date.
+                <strong>Return & Refund Policy:</strong> If the product arrives damaged, fractured, or does not match specifications, initiate a return within 7 calendar days from parcel delivery date for a free courier pickup.
               </p>
             </div>
           )}
         </div>
+
+        {/* Frequently Bought Together Bundle */}
+        {relatedProducts.length > 0 && (
+          <div className="bg-white rounded-2xl border border-border-light p-4 sm:p-6 shadow-xs mb-10 sm:mb-14">
+            <h3 className="text-sm sm:text-base font-black text-text-main mb-1">
+              Frequently Bought Together
+            </h3>
+            <p className="text-xs text-text-muted mb-4">
+              Bundle this product with a popular complementary item and get an extra 5% combo discount.
+            </p>
+
+            <div className="flex flex-col md:flex-row items-center justify-between gap-5">
+              {/* Product Thumbnails Combo */}
+              <div className="flex items-center gap-3 sm:gap-4 flex-wrap">
+                {/* Item 1 (Main Product) */}
+                <div className="flex items-center gap-2.5 p-2 rounded-xl border border-border-light bg-brand-surface/50">
+                  <div className="relative w-14 h-14 rounded-lg overflow-hidden bg-white shrink-0 border border-border-light">
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="max-w-[140px]">
+                    <span className="text-[10px] text-text-muted uppercase font-bold block">This Item</span>
+                    <h4 className="text-xs font-bold text-text-main truncate">{product.name}</h4>
+                    <span className="text-xs font-black text-brand">৳{product.price.toLocaleString()}</span>
+                  </div>
+                </div>
+
+                <span className="text-base font-black text-brand bg-brand-light w-7 h-7 rounded-full flex items-center justify-center shrink-0">
+                  +
+                </span>
+
+                {/* Item 2 (Complementary Item) */}
+                <Link
+                  href={`/products/${relatedProducts[0].slug}`}
+                  className="flex items-center gap-2.5 p-2 rounded-xl border border-border-light bg-brand-surface/50 hover:border-brand/40 transition-colors"
+                >
+                  <div className="relative w-14 h-14 rounded-lg overflow-hidden bg-white shrink-0 border border-border-light">
+                    <Image
+                      src={relatedProducts[0].image}
+                      alt={relatedProducts[0].name}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="max-w-[140px]">
+                    <span className="text-[10px] text-text-muted uppercase font-bold block">Recommended</span>
+                    <h4 className="text-xs font-bold text-text-main truncate">{relatedProducts[0].name}</h4>
+                    <span className="text-xs font-black text-brand">৳{relatedProducts[0].price.toLocaleString()}</span>
+                  </div>
+                </Link>
+              </div>
+
+              {/* Bundle Pricing & One-Click Add to Cart */}
+              <div className="flex flex-col sm:flex-row sm:items-center gap-3 self-stretch md:self-auto justify-end">
+                <div className="text-left md:text-right">
+                  <span className="text-[10px] uppercase font-bold text-text-muted block">Bundle Combo Total</span>
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-base sm:text-lg font-black text-brand">
+                      ৳{Math.round((product.price + relatedProducts[0].price) * 0.95).toLocaleString()}
+                    </span>
+                    <span className="text-xs text-text-muted line-through">
+                      ৳{(product.price + relatedProducts[0].price).toLocaleString()}
+                    </span>
+                  </div>
+                  <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.2 rounded inline-block mt-0.5">
+                    Save Extra 5% with Combo
+                  </span>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    toast.success(`Combo added: ${product.name.slice(0, 16)}... + ${relatedProducts[0].name.slice(0, 16)}... to Cart!`);
+                  }}
+                  className="px-4 py-2.5 bg-brand hover:bg-brand-hover text-white text-xs font-bold rounded-xl shadow-2xs transition-all cursor-pointer flex items-center justify-center gap-1.5 shrink-0"
+                >
+                  <ShoppingCart className="w-3.5 h-3.5" />
+                  <span>Add Both to Cart</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Related Products Showcase (5 columns on desktop) */}
         <div>
