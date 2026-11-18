@@ -46,11 +46,6 @@ director.js
 .env.test.local
 .env.production.local
 *.env
-.env
-.env.*
-.env.local
-.env.production
-.vscode/
 
 *.orc
 *.eot
@@ -71,3 +66,8 @@ public/fonts/
 .envrc
 .venv/
 venv/
+
+
+# VS Code
+*.orc
+
